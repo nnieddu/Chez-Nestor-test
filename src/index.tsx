@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -11,7 +12,7 @@ import "./style/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-  // <React.StrictMode>
+  <React.StrictMode>
   <PropertyAdsContextProvider>
     <BrowserRouter>
       <Routes>
@@ -28,5 +29,5 @@ root.render(
       </Routes>
     </BrowserRouter>
   </PropertyAdsContextProvider>
-  // </React.StrictMode>
+  </React.StrictMode>
 );

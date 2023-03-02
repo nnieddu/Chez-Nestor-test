@@ -1,6 +1,9 @@
 import { PropertyAd } from "../types/propertyAdTypes";
 import { Link } from "react-router-dom";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+
 interface PropertyAdCardProps {
   propertyAd: PropertyAd;
 }
@@ -20,18 +23,19 @@ export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
           <h2 className="text-gray-900 font-bold text-2xl">
             {propertyAd.title.stringValue}
           </h2>
-          <p className="mt-2 text-gray-600 text-sm">
+          <p className="mt-3 text-gray-600 text-sm whitespace-pre ">
             {propertyAd.description.stringValue}
           </p>
-          <div className="flex mt-3">
+          <div className="mt-3">
             <h2 className="text-gray-700 font-bold text-xl">
               {propertyAd.price.stringValue}€
             </h2>
           </div>
-          <div className="mt-3 flex justify-end items-center">
+          <div className="mt-3">
             <Link to={`/property/${propertyAd.documentId}`}>
               <button className="px-3 py-2 bg-chezNestor text-white text-s font-bold uppercase rounded">
                 Voir l'annonce
+								<FontAwesomeIcon className="ml-5" icon={faEye} />
               </button>
             </Link>
           </div>

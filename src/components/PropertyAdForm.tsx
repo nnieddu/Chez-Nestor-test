@@ -4,9 +4,11 @@ import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 
 interface PropertyAdFormProps {
   setIsModalOpen: (isModalOpen: boolean) => void;
+	isEdit : boolean;
 }
-const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
+const PropertyAdForm = ({ setIsModalOpen, isEdit }: PropertyAdFormProps) => {
   const { addPropertyAd } = useContext(PropertyAdsContext);
+  const { updatePropertyAd } = useContext(PropertyAdsContext);
   const [formData, setFormData] = useState<PropertyAdFirebase>({
     description: { stringValue: "" },
     img: { stringValue: "" },
@@ -29,7 +31,10 @@ const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addPropertyAd(formData);
+		if (!isEdit)
+    	addPropertyAd(formData);
+		else
+			updatePropertyAd(formData)
     setIsModalOpen(false);
     setFormData({
       description: { stringValue: "" },

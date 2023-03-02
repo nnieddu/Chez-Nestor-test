@@ -1,16 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
-
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import Modal from "./Modal";
 
 const DedicatedPage = () => {
   const { id } = useParams<{ id: string }>();
   const { propertyAds } = useContext(PropertyAdsContext);
   const propertyAd = propertyAds.find((ad) => ad.documentId === id);
-
   const { deletePropertyAd } = useContext(PropertyAdsContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   if (!propertyAd) {
     return <div>Property ad not found</div>;
@@ -18,6 +22,14 @@ const DedicatedPage = () => {
 
   return (
     <div className="my-6">
+      {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={true} />}
+      <FontAwesomeIcon
+        className="cursor-pointer"
+        onClick={() => {
+          navigate(-1);
+        }}
+        icon={faLeftLong}
+      />
       <div className="flex flex-col lg:flex-row bg-cardColor shadow-lg rounded-lg overflow-hidden">
         <div
           className="h-48 lg:h-auto lg:w-48 flex-none bg-cover bg-center rounded-t-lg lg:rounded-t-none lg:rounded-l-lg overflow-hidden"
@@ -33,17 +45,27 @@ const DedicatedPage = () => {
           <p className="mt-2 text-gray-600 text-sm">
             {propertyAd.description.stringValue}
           </p>
-          <div className="flex mt-3">
+          <div className="flex mt-6">
             <h2 className="text-gray-700 font-bold text-xl">
               {propertyAd.price.stringValue}€
             </h2>
           </div>
-          <div className="mt-3 flex justify-end items-center">
+          <div className="mt-6 items-center">
             <button
-              onClick={() => deletePropertyAd(propertyAd.documentId)}
-              className="px-3 py-2 bg-chezNestor text-white text-s ml-3 lg:ml-6 font-bold uppercase rounded"
+              onClick={() => setIsModalOpen(true)}
+              className="px-3 py-2 bg-chezNestor text-white text-s mr-3 lg:mr-6 font-bold rounded"
             >
-              Supprimer l'annonce
+              Editer
+              <FontAwesomeIcon className="ml-5" icon={faPenToSquare} />
+            </button>
+            <button
+              onClick={() => {
+                deletePropertyAd(propertyAd.documentId);
+                navigate(-1);
+              }}
+              className="px-3 py-2 bg-chezNestor text-white text-s lg:ml-6 font-bold rounded"
+            >
+              Supprimer
               <FontAwesomeIcon className="ml-5" icon={faTrashCan} />
             </button>
           </div>

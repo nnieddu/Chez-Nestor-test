@@ -26,9 +26,7 @@ const Content = () => {
       {sortedPropertyAds.map((propertyAd, index) => (
         <PropertyAdCard key={index} propertyAd={propertyAd} />
       ))}
-      {isModalOpen && (
-        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      )}
+      {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={false} />}
     </div>
   );
 };
