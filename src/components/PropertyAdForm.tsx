@@ -42,7 +42,7 @@ const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col ">
       <label className="mt-2 font-semibold">Titre</label>
-      <input
+      <input required
         name="title"
         type="text"
         value={formData.title.stringValue}
@@ -51,7 +51,7 @@ const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
       />
 
       <label className="mt-2 font-semibold">Description</label>
-      <textarea
+      <textarea required
         name="description"
         value={formData.description.stringValue}
         onChange={handleChange}
@@ -59,7 +59,7 @@ const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
       />
 
       <label className="mt-2 font-semibold">Image (URL)</label>
-      <input
+      <input required
         name="img"
         type="text"
         value={formData.img.stringValue}
@@ -68,9 +68,9 @@ const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
       />
 
       <label className="mt-2 font-semibold">Prix</label>
-      <input
+      <input required
         name="price"
-				type=""
+				type="number"
         value={formData.price.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"

@@ -47,7 +47,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
   const addPropertyAd = async (propertyAd: PropertyAdFirebase) => {
     try {
       const response = await fetch(
-        "https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/",
+        "https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd",
         {
           method: "POST",
           headers: {
