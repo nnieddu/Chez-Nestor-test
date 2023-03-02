@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { PropertyAd } from "../types/propertyAdTypes";
+import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 
-interface PropertyAd {
-  description: string;
-  img: string;
-  price: number;
-  title: string;
+interface PropertyAdFormProps {
+  setIsModalOpen: (isModalOpen: boolean) => void;
 }
-
-const PropertyAdForm = () => {
+const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
+  const { addPropertyAd } = useContext(PropertyAdsContext);
   const [formData, setFormData] = useState<PropertyAd>({
-    description: "",
-    img: "",
-    price: 0,
-    title: "",
+    description: { stringValue: "" },
+    img: { stringValue: "" },
+    price: { stringValue: "0" },
+    title: { stringValue: "" },
   });
 
   const handleChange = (
@@ -21,12 +20,25 @@ const PropertyAdForm = () => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: {
+        ...(prevFormData as any)[name],
+        stringValue: value,
+      },
     }));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // console.log(event);
+    // console.log(formData);
+    addPropertyAd(formData);
+    setIsModalOpen(false);
+    setFormData({
+      description: { stringValue: "" },
+      img: { stringValue: "" },
+      price: { stringValue: "0" },
+      title: { stringValue: "" },
+    });
   };
 
   return (
@@ -35,7 +47,7 @@ const PropertyAdForm = () => {
       <input
         name="title"
         type="text"
-        value={formData.title}
+        value={formData.title.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"
       />
@@ -43,16 +55,16 @@ const PropertyAdForm = () => {
       <label className="mt-2 font-semibold">Description</label>
       <textarea
         name="description"
-        value={formData.description}
+        value={formData.description.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2 resize-none"
       />
 
-      <label className="mt-2 font-semibold">Image URL</label>
+      <label className="mt-2 font-semibold">Image (URL)</label>
       <input
         name="img"
         type="text"
-        value={formData.img}
+        value={formData.img.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"
       />
@@ -60,8 +72,7 @@ const PropertyAdForm = () => {
       <label className="mt-2 font-semibold">Prix</label>
       <input
         name="price"
-        type="number"
-        value={formData.price}
+        value={formData.price.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"
       />

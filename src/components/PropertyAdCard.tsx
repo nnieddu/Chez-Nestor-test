@@ -24,14 +24,14 @@ export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
           </p>
           <div className="flex mt-3">
             <h2 className="text-gray-700 font-bold text-xl">
-              {propertyAd.price.integerValue}€
+              {propertyAd.price.stringValue}€
             </h2>
           </div>
-          <div className="flex justify-between mt-3 ">
+          <div className="mt-3 ">
             <button className="px-3 py-2 bg-chezNestor text-white text-s font-bold uppercase rounded">
               Voir l'annonce
             </button>
-            <button className="px-3 py-2 bg-chezNestor text-white text-s font-bold uppercase rounded">
+            <button className="px-3 py-2 bg-chezNestor text-white text-s ml-16 font-bold uppercase rounded">
               Supprimer l'annonce
               <FontAwesomeIcon className="ml-5" icon={faTrashCan} />
             </button>

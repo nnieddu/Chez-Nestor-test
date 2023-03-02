@@ -1,15 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
 import PropertyAdForm from "./PropertyAdForm";
-import { PropertyAd } from "../types/propertyAdTypes";
 
 interface ModalProps {
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
 }
-
-const handleSubmit = (propertyAd: PropertyAd) => {
-	console.log("Submitted property ad:", propertyAd);
-};
 
 const Modal = ({ isModalOpen, setIsModalOpen }: ModalProps) => {
   return (
@@ -31,7 +26,7 @@ const Modal = ({ isModalOpen, setIsModalOpen }: ModalProps) => {
                     <p className="text-sm text-gray-500">
                       Veuillez remplir tous les champs ci-dessous :
                     </p>
-										<PropertyAdForm />
+										<PropertyAdForm setIsModalOpen={setIsModalOpen}/>
                   </div>
                 </div>
               </div>

@@ -7,11 +7,11 @@
 
 export interface PropertyAd {
   description: { stringValue: string };
-  documentId: { stringValue: string };
   img: { stringValue: string };
-  price: { integerValue: number };
+  price: { stringValue: string };
   title: { stringValue: string };
 }
+// documentId: { stringValue: string };
 
 // export function convertFirebaseToPropertyAd(firebaseAd: PropertyAdFirebase): PropertyAd {
 //   const propertyAd: PropertyAd = {
