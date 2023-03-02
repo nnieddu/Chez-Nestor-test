@@ -29,8 +29,6 @@ const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log(event);
-    // console.log(formData);
     addPropertyAd(formData);
     setIsModalOpen(false);
     setFormData({
