@@ -10,6 +10,10 @@ const Content = () => {
   const { propertyAds } = useContext(PropertyAdsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const sortedPropertyAds = [...propertyAds].sort((a, b) =>
+    a.title.stringValue.localeCompare(b.title.stringValue)
+  );
+
   return (
     <div className="mx-28 flex flex-col">
       <button
@@ -19,7 +23,7 @@ const Content = () => {
         Ajouter une annonce
         <FontAwesomeIcon className="ml-5" icon={faSquarePlus} />
       </button>
-      {propertyAds.map((propertyAd, index) => (
+      {sortedPropertyAds.map((propertyAd, index) => (
         <PropertyAdCard key={index} propertyAd={propertyAd} />
       ))}
       {isModalOpen && (

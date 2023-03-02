@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { PropertyAd } from "../types/propertyAdTypes";
+import { PropertyAdFirebase } from "../types/propertyAdTypes";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 
 interface PropertyAdFormProps {
@@ -7,7 +7,7 @@ interface PropertyAdFormProps {
 }
 const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
   const { addPropertyAd } = useContext(PropertyAdsContext);
-  const [formData, setFormData] = useState<PropertyAd>({
+  const [formData, setFormData] = useState<PropertyAdFirebase>({
     description: { stringValue: "" },
     img: { stringValue: "" },
     price: { stringValue: "0" },
@@ -70,6 +70,7 @@ const PropertyAdForm = ({ setIsModalOpen }: PropertyAdFormProps) => {
       <label className="mt-2 font-semibold">Prix</label>
       <input
         name="price"
+				type=""
         value={formData.price.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"

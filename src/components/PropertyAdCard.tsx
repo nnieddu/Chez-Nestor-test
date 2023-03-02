@@ -1,14 +1,16 @@
+import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { PropertyAd } from "../types/propertyAdTypes";
+import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 
 interface PropertyAdCardProps {
   propertyAd: PropertyAd;
-  onUpdate?: (updatedPropertyAd: PropertyAd) => void;
-  onDelete?: (id: number) => void;
 }
 
 export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
+  const { deletePropertyAd } = useContext(PropertyAdsContext);
+
   return (
     <div className="my-6">
       <div className="flex bg-cardColor shadow-lg rounded-lg overflow-hidden">
@@ -31,7 +33,7 @@ export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
             <button className="px-3 py-2 bg-chezNestor text-white text-s font-bold uppercase rounded">
               Voir l'annonce
             </button>
-            <button className="px-3 py-2 bg-chezNestor text-white text-s ml-16 font-bold uppercase rounded">
+            <button onClick={() => deletePropertyAd(propertyAd.documentId)} className="px-3 py-2 bg-chezNestor text-white text-s ml-16 font-bold uppercase rounded">
               Supprimer l'annonce
               <FontAwesomeIcon className="ml-5" icon={faTrashCan} />
             </button>

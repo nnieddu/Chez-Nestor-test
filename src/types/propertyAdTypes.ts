@@ -4,8 +4,15 @@ export interface PropertyAd {
   img: { stringValue: string };
   price: { stringValue: string };
   title: { stringValue: string };
+	documentId : string;
 }
-// documentId: { stringValue: string };
+
+export interface PropertyAdFirebase {
+  description: { stringValue: string };
+  img: { stringValue: string };
+  price: { stringValue: string };
+  title: { stringValue: string };
+}
 
 // export function convertFirebaseToPropertyAd(firebaseAd: PropertyAdFirebase): PropertyAd {
 //   const propertyAd: PropertyAd = {
