@@ -7,17 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
 const Content = () => {
-  const { propertyAds, addPropertyAd } = useContext(PropertyAdsContext);
+  const { propertyAds } = useContext(PropertyAdsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleAddPropertyAd = () => {
-    setIsModalOpen(true);
-  };
 
   return (
     <div className="mx-28 flex flex-col">
       <button
-        onClick={handleAddPropertyAd}
+        onClick={() => setIsModalOpen(true)}
         className="px-3 mx-auto my-5 py-2 bg-chezNestor text-white font-bold uppercase rounded"
       >
         Ajouter une annonce
