@@ -5,17 +5,17 @@ import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 interface PropertyAdFormProps {
   setIsModalOpen: (isModalOpen: boolean) => void;
   isEdit: boolean;
-  propertyAd?: PropertyAd | null;
+  propertyAd?: PropertyAd;
 }
 const PropertyAdForm = ({ setIsModalOpen, isEdit, propertyAd }: PropertyAdFormProps) => {
   const { addPropertyAd } = useContext(PropertyAdsContext);
   const { updatePropertyAd } = useContext(PropertyAdsContext);
-  const [formData, setFormData] = useState<PropertyAdFirebase>({
-    description: { stringValue: "" },
-    img: { stringValue: "" },
-    price: { stringValue: "0" },
-    title: { stringValue: "" },
-  });
+	const [formData, setFormData] = useState<PropertyAdFirebase>({
+		description: { stringValue: propertyAd?.description.stringValue ?? "" },
+		img: { stringValue: propertyAd?.img.stringValue ?? "" },
+		price: { stringValue: propertyAd?.price.stringValue ?? "0" },
+		title: { stringValue: propertyAd?.title.stringValue ?? "" },
+	});
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -54,9 +54,6 @@ const PropertyAdForm = ({ setIsModalOpen, isEdit, propertyAd }: PropertyAdFormPr
       title: { stringValue: "" },
     });
   };
-
-  console.log(isEdit);
-  console.log(propertyAd?.title.stringValue);
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col ">

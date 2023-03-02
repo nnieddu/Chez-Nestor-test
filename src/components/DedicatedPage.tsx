@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { faLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import Modal from "./Modal";
 
 const DedicatedPage = () => {
@@ -24,11 +24,11 @@ const DedicatedPage = () => {
     <div className="my-6">
       {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={true} propertyAd={propertyAd} />}
       <FontAwesomeIcon
-        className="cursor-pointer"
+        className="cursor-pointer fa-8 mb-8x"
         onClick={() => {
           navigate(-1);
         }}
-        icon={faLeftLong}
+        icon={faArrowCircleLeft}
       />
       <div className="flex flex-col lg:flex-row bg-cardColor shadow-lg rounded-lg overflow-hidden">
         <div

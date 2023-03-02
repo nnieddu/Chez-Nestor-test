@@ -29,7 +29,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, isEdit, propertyAd }: ModalProps) 
                     <p className="text-sm text-gray-500">
                       Veuillez remplir tous les champs ci-dessous :
                     </p>
-                    <PropertyAdForm setIsModalOpen={setIsModalOpen} isEdit={isEdit} propertyAd={isEdit ? propertyAd : null} />
+                    <PropertyAdForm setIsModalOpen={setIsModalOpen} isEdit={isEdit} propertyAd={isEdit ? propertyAd : undefined} />
                   </div>
                 </div>
               </div>
