@@ -14,8 +14,6 @@ const Content = () => {
     setIsModalOpen(true);
   };
 
-  console.log("CONTENT: ", propertyAds);
-
   return (
     <div className="mx-28 flex flex-col">
       <button
@@ -29,10 +27,7 @@ const Content = () => {
         <PropertyAdCard key={index} propertyAd={propertyAd} />
       ))}
       {isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
-          {/* Ajoutez ici le contenu du modal, en utilisant les props si besoin */}
-          <h1>Ajouter une annonce</h1>
-        </Modal>
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
       )}
     </div>
   );

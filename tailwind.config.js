@@ -15,6 +15,8 @@ module.exports = {
       emerald: colors.emerald,
       indigo: colors.indigo,
       yellow: colors.yellow,
+      red: colors.red,
+      green: colors.green,
 			chezNestor: "#86d9d1",
 			cardColor: "#ecececd5"
     },
