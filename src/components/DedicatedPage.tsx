@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import backgroundHeaderImg from "../style/backgroundHeader.jpg";
 import Modal from "./Modal";
 
 const DedicatedPage = () => {
@@ -17,14 +18,33 @@ const DedicatedPage = () => {
   const navigate = useNavigate();
 
   if (!propertyAd) {
-    return <div>Property ad not found</div>;
+    return (
+      <div className="relative py-32">
+        <img
+          className="absolute shadow-lg inset-0 -z-10 h-full w-full object-cover brightness-50"
+          src={backgroundHeaderImg}
+          alt="Living room background"
+        />
+        <h2 className="py-32 text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
+          Erreur 404 : <br/>  {id}  <br/> annonce non trouvée !...
+        </h2>
+      </div>
+    );
   }
 
   return (
     <div className="my-6">
-      {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={true} propertyAd={propertyAd} />}
+      {isModalOpen && (
+        <Modal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+          isEdit={true}
+          propertyAd={propertyAd}
+        />
+      )}
       <FontAwesomeIcon
-        className="cursor-pointer fa-8 mb-8x"
+        className="absolute cursor-pointer fa-6x ml-5"
+				style={{color: "#7dccc4"}}
         onClick={() => {
           navigate(-1);
         }}

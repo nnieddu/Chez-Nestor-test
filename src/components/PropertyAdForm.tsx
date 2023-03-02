@@ -10,12 +10,12 @@ interface PropertyAdFormProps {
 const PropertyAdForm = ({ setIsModalOpen, isEdit, propertyAd }: PropertyAdFormProps) => {
   const { addPropertyAd } = useContext(PropertyAdsContext);
   const { updatePropertyAd } = useContext(PropertyAdsContext);
-	const [formData, setFormData] = useState<PropertyAdFirebase>({
-		description: { stringValue: propertyAd?.description.stringValue ?? "" },
-		img: { stringValue: propertyAd?.img.stringValue ?? "" },
-		price: { stringValue: propertyAd?.price.stringValue ?? "0" },
-		title: { stringValue: propertyAd?.title.stringValue ?? "" },
-	});
+  const [formData, setFormData] = useState<PropertyAdFirebase>({
+    description: { stringValue: propertyAd?.description.stringValue ?? "" },
+    img: { stringValue: propertyAd?.img.stringValue ?? "" },
+    price: { stringValue: propertyAd?.price.stringValue ?? "0" },
+    title: { stringValue: propertyAd?.title.stringValue ?? "" },
+  });
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -100,6 +100,12 @@ const PropertyAdForm = ({ setIsModalOpen, isEdit, propertyAd }: PropertyAdFormPr
         className="mt-4 px-4 py-2 rounded-md bg-green-400 hover:bg-green-500 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 w-full sm:w-auto"
       >
         Publier
+      </button>
+      <button
+        className="mt-4 px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-400 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 w-full sm:w-auto"
+        onClick={() => setIsModalOpen(false)}
+      >
+        Annuler
       </button>
     </form>
   );
