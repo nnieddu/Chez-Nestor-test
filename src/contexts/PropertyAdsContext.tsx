@@ -4,8 +4,8 @@ import { PropertyAd, PropertyAdFirebase } from "../types/propertyAdTypes";
 type PropertyAdsContextType = {
   propertyAds: PropertyAd[];
   addPropertyAd: (propertyAd: PropertyAdFirebase) => void;
-  updatePropertyAd: (propertyAd: PropertyAdFirebase) => void;
-  deletePropertyAd: (documentId: string | undefined) => void;
+  updatePropertyAd: (propertyAd: PropertyAd) => void;
+  deletePropertyAd: (documentId: string) => void;
   error: Error | null;
 };
 
@@ -71,19 +71,18 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
     }
   };
 
-	const updatePropertyAd = async (updatedPropertyAd: PropertyAdFirebase) => {
+	const updatePropertyAd = async (updatedPropertyAd: PropertyAd) => {
 		try {
-			// const documentId = updatedPropertyAd.documentId;
+			const { documentId, ...updatedFields } = updatedPropertyAd;
 			const response = await fetch(
-				`https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/`,
-				// `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`,
+				`https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`,
 				{
 					method: "PATCH",
 					headers: {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify({
-						fields: updatedPropertyAd,
+						fields: updatedFields,
 					}),
 				}
 			);
@@ -91,11 +90,10 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
 				const error = new Error(`Error : ${response.status}`);
 				throw error;
 			} else {
-				// const updatedPropertyAds = propertyAds.map((propertyAd) =>
-					// propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
-					// propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
-				// );
-				// setPropertyAds(updatedPropertyAds);
+				const updatedPropertyAds = propertyAds.map((propertyAd) =>
+					propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
+				);
+				setPropertyAds(updatedPropertyAds);
 			}
 		} catch (error) {
 			// setError(error);
