@@ -1,13 +1,15 @@
 import { Dialog, Transition } from "@headlessui/react";
 import PropertyAdForm from "./PropertyAdForm";
+import { PropertyAd } from "../types/propertyAdTypes";
 
 interface ModalProps {
 	isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
   isEdit : boolean;
+	propertyAd?: PropertyAd;
 }
 
-const Modal = ({ isModalOpen, setIsModalOpen, isEdit }: ModalProps) => {
+const Modal = ({ isModalOpen, setIsModalOpen, isEdit, propertyAd }: ModalProps) => {
   return (
     <Transition.Root show={isModalOpen}>
       <Dialog as="div" className="relative z-10" onClose={() => setIsModalOpen(false)}>
@@ -27,7 +29,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, isEdit }: ModalProps) => {
                     <p className="text-sm text-gray-500">
                       Veuillez remplir tous les champs ci-dessous :
                     </p>
-                    <PropertyAdForm setIsModalOpen={setIsModalOpen} isEdit={isEdit} />
+                    <PropertyAdForm setIsModalOpen={setIsModalOpen} isEdit={isEdit} propertyAd={isEdit ? propertyAd : null} />
                   </div>
                 </div>
               </div>

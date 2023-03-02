@@ -33,7 +33,7 @@ export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
           </div>
           <div className="mt-3">
             <Link to={`/property/${propertyAd.documentId}`}>
-              <button className="px-3 py-2 bg-chezNestor text-white text-s font-bold uppercase rounded">
+              <button className="px-3 py-2 bg-chezNestor hover:bg-chezNestorDark text-white text-s font-bold uppercase rounded">
                 Voir l'annonce
 								<FontAwesomeIcon className="ml-5" icon={faEye} />
               </button>

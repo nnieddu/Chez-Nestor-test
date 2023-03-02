@@ -71,9 +71,36 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
     }
   };
 
-  const updatePropertyAd = (updatedPropertyAd: PropertyAdFirebase) => {
-    // TODO
-  };
+	const updatePropertyAd = async (updatedPropertyAd: PropertyAdFirebase) => {
+		try {
+			// const documentId = updatedPropertyAd.documentId;
+			const response = await fetch(
+				`https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/`,
+				// `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`,
+				{
+					method: "PATCH",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						fields: updatedPropertyAd,
+					}),
+				}
+			);
+			if (!response.ok) {
+				const error = new Error(`Error : ${response.status}`);
+				throw error;
+			} else {
+				// const updatedPropertyAds = propertyAds.map((propertyAd) =>
+					// propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
+					// propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
+				// );
+				// setPropertyAds(updatedPropertyAds);
+			}
+		} catch (error) {
+			// setError(error);
+		}
+	};
 
   const deletePropertyAd = async (documentId: string | undefined) => {
     const url = `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`;

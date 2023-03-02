@@ -22,7 +22,7 @@ const DedicatedPage = () => {
 
   return (
     <div className="my-6">
-      {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={true} />}
+      {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={true} propertyAd={propertyAd} />}
       <FontAwesomeIcon
         className="cursor-pointer"
         onClick={() => {
@@ -53,7 +53,7 @@ const DedicatedPage = () => {
           <div className="mt-6 items-center">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="px-3 py-2 bg-chezNestor text-white text-s mr-3 lg:mr-6 font-bold rounded"
+              className="px-3 py-2 bg-chezNestor hover:bg-chezNestorDark text-white text-s mr-3 lg:mr-6 font-bold rounded"
             >
               Editer
               <FontAwesomeIcon className="ml-5" icon={faPenToSquare} />
@@ -63,7 +63,7 @@ const DedicatedPage = () => {
                 deletePropertyAd(propertyAd.documentId);
                 navigate(-1);
               }}
-              className="px-3 py-2 bg-chezNestor text-white text-s lg:ml-6 font-bold rounded"
+              className="px-3 py-2 bg-chezNestor hover:bg-chezNestorDark text-white text-s lg:ml-6 font-bold rounded"
             >
               Supprimer
               <FontAwesomeIcon className="ml-5" icon={faTrashCan} />

@@ -18,7 +18,7 @@ const Content = () => {
     <div className="mx-28 flex flex-col">
       <button
         onClick={() => setIsModalOpen(true)}
-        className="px-3 mx-auto my-5 py-2 bg-chezNestor text-white font-bold uppercase rounded"
+        className="px-3 mx-auto my-5 py-2 bg-chezNestor hover:bg-chezNestorDark text-white font-bold uppercase rounded"
       >
         Ajouter une annonce
         <FontAwesomeIcon className="ml-5" icon={faSquarePlus} />

@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
-import { PropertyAdFirebase } from "../types/propertyAdTypes";
+import { PropertyAd, PropertyAdFirebase } from "../types/propertyAdTypes";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 
 interface PropertyAdFormProps {
   setIsModalOpen: (isModalOpen: boolean) => void;
 	isEdit : boolean;
+	propertyAd?: PropertyAd | null;
 }
-const PropertyAdForm = ({ setIsModalOpen, isEdit }: PropertyAdFormProps) => {
+const PropertyAdForm = ({ setIsModalOpen, isEdit, propertyAd }: PropertyAdFormProps) => {
   const { addPropertyAd } = useContext(PropertyAdsContext);
   const { updatePropertyAd } = useContext(PropertyAdsContext);
   const [formData, setFormData] = useState<PropertyAdFirebase>({
@@ -44,13 +45,18 @@ const PropertyAdForm = ({ setIsModalOpen, isEdit }: PropertyAdFormProps) => {
     });
   };
 
+	console.log(isEdit)
+	console.log(propertyAd?.title.stringValue)
+	console.log(propertyAd?.description.stringValue)
+	console.log(propertyAd?.img.stringValue)
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col ">
       <label className="mt-2 font-semibold">Titre</label>
       <input required
         name="title"
         type="text"
-        value={formData.title.stringValue}
+        value={isEdit ? propertyAd?.title.stringValue : formData.title.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"
       />
@@ -58,7 +64,7 @@ const PropertyAdForm = ({ setIsModalOpen, isEdit }: PropertyAdFormProps) => {
       <label className="mt-2 font-semibold">Description</label>
       <textarea required
         name="description"
-        value={formData.description.stringValue}
+        value={isEdit ? propertyAd?.description.stringValue : formData.description.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2 resize-none"
       />
@@ -67,7 +73,7 @@ const PropertyAdForm = ({ setIsModalOpen, isEdit }: PropertyAdFormProps) => {
       <input required
         name="img"
         type="text"
-        value={formData.img.stringValue}
+        value={isEdit ? propertyAd?.img.stringValue : formData.img.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"
       />
@@ -76,7 +82,7 @@ const PropertyAdForm = ({ setIsModalOpen, isEdit }: PropertyAdFormProps) => {
       <input required
         name="price"
 				type="number"
-        value={formData.price.stringValue}
+        value={isEdit ? propertyAd?.price.stringValue : formData.price.stringValue}
         onChange={handleChange}
         className="border rounded-md p-2"
       />

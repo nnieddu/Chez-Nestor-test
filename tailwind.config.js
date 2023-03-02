@@ -18,6 +18,7 @@ module.exports = {
       red: colors.red,
       green: colors.green,
 			chezNestor: "#86d9d1",
+			chezNestorDark: "#7dccc4",
 			cardColor: "#ecececd5"
     },
     extend: {},
