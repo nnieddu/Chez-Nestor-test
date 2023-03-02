@@ -1,10 +1,4 @@
-// export interface PropertyAd {
-//   description: string;
-//   img: string;
-//   price: number;
-//   title: string;
-// }
-
+// firebase interface 
 export interface PropertyAd {
   description: { stringValue: string };
   img: { stringValue: string };
