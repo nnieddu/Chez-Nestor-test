@@ -5,7 +5,7 @@ type PropertyAdsContextType = {
   propertyAds: PropertyAd[];
   addPropertyAd: (propertyAd: PropertyAdFirebase) => void;
   updatePropertyAd: (propertyAd: PropertyAdFirebase) => void;
-  deletePropertyAd: (documentId: string) => void;
+  deletePropertyAd: (documentId: string | undefined) => void;
   error: Error | null;
 };
 
@@ -75,7 +75,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
     // TODO
   };
 
-  const deletePropertyAd = async (documentId: string) => {
+  const deletePropertyAd = async (documentId: string | undefined) => {
     const url = `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`;
     const response = await fetch(url, {
       method: "DELETE",

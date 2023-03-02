@@ -1,30 +1,56 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
+import { useParams } from "react-router-dom";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
-import PropertyAdCard from "./PropertyAdCard";
-import Modal from "./Modal";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
-const Content = () => {
+const DedicatedPage = () => {
+  const { id } = useParams<{ id: string }>();
   const { propertyAds } = useContext(PropertyAdsContext);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const propertyAd = propertyAds.find((ad) => ad.documentId === id);
+
+  const { deletePropertyAd } = useContext(PropertyAdsContext);
+
+  if (!propertyAd) {
+    return <div>Property ad not found</div>;
+  }
 
   return (
-    <div className="mx-28 flex flex-col">
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="px-3 mx-auto my-5 py-2 bg-chezNestor text-white font-bold uppercase rounded"
-      >
-        Ajouter une annonce
-        <FontAwesomeIcon className="ml-5" icon={faSquarePlus} />
-      </button>
-      {propertyAds.map((propertyAd, index) => (
-        <PropertyAdCard key={index} propertyAd={propertyAd} />
-      ))}
-      {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
+    <div className="my-6">
+      <div className="flex flex-col lg:flex-row bg-cardColor shadow-lg rounded-lg overflow-hidden">
+        <div
+          className="h-48 lg:h-auto lg:w-48 flex-none bg-cover bg-center rounded-t-lg lg:rounded-t-none lg:rounded-l-lg overflow-hidden"
+          style={{
+            backgroundImage: `url(${propertyAd.img.stringValue})`,
+            minWidth: "8rem",
+          }}
+        ></div>
+        <div className="flex flex-col p-4 lg:pl-4 justify-between">
+          <h2 className="text-gray-900 font-bold text-2xl">
+            {propertyAd.title.stringValue}
+          </h2>
+          <p className="mt-2 text-gray-600 text-sm">
+            {propertyAd.description.stringValue}
+          </p>
+          <div className="flex mt-3">
+            <h2 className="text-gray-700 font-bold text-xl">
+              {propertyAd.price.stringValue}€
+            </h2>
+          </div>
+          <div className="mt-3 flex justify-end items-center">
+            <button
+              onClick={() => deletePropertyAd(propertyAd.documentId)}
+              className="px-3 py-2 bg-chezNestor text-white text-s ml-3 lg:ml-6 font-bold uppercase rounded"
+            >
+              Supprimer l'annonce
+              <FontAwesomeIcon className="ml-5" icon={faTrashCan} />
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Content;
+export default DedicatedPage;
