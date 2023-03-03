@@ -22,5 +22,5 @@ L'application est déployée sur github page.
 Créer : en cliquant sur le bouton "Ajouter une annonce", tous les champs sont nécessaires.  
 Voir : en cliquant sur l'annonce ou le bouton "Voir l'annonce", une page dédiée s'ouvre.  
 Une fois sur la page dédiée d'une annonce :  
-- Editer : en cliquant sur le bouton "Éditer"  
-- Supprimer des appartements : en cliquant sur le bouton "Supprimer"  
+- Éditer : en cliquant sur le bouton "Éditer"  
+- Supprimer une annonce : en cliquant sur le bouton "Supprimer"  
