@@ -2,7 +2,7 @@
   "name": "chez-nestor-test",
   "version": "0.1.0",
   "private": true,
-	"homepage": "https://nnieddu.github.io/apparts/",
+	"homepage": "https://nnieddu.github.io/ChezNestorImmo/",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
