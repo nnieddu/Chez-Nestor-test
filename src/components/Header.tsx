@@ -14,7 +14,7 @@ export default function Header() {
         Chez-Nestor Immo
 				<br></br>
 				<br></br>
-        <FontAwesomeIcon className="ml-5" icon={faHouseUser} />
+        <FontAwesomeIcon icon={faHouseUser} />
       </h2>
     </div>
   );
