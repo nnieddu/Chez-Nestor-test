@@ -25,7 +25,6 @@ export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
 					onError={() => setImgSrc(defaultImage)}
         />
           <div className="flex flex-col p-4 lg:pl-4 whitespace-pre-line ellipsized">
-          {/* <div className="flex flex-col p-4 lg:pl-4 justify-between whitespace-pre-line ellipsized"> */}
             <h2 className="ml-1 text-gray-900 font-bold text-2xl titleEllipsized">
               {propertyAd.title.stringValue}
             </h2>

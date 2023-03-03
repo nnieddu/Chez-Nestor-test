@@ -58,7 +58,7 @@ const DedicatedPage = () => {
       />
       <div className="flex flex-col whitespace-pre-line wordBreak">
         <img
-          className="rounded-b-lg shadow-lg inset-0 -z-10 max-h-[100vh] object-cover m-auto shadow-lg"
+          className="mt-1 rounded-lg shadow-lg inset-0 -z-10 max-h-[99vh] object-cover m-auto shadow-lg"
           src={imgSrc}
           alt="Living room background"
           onError={() => setImgSrc(defaultImage)}

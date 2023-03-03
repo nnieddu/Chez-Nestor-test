@@ -22,7 +22,7 @@ Une fois sur la page dédie d'une annonce :
 
 --------------
 pagination si beacoup d'annonces  
-loadings
 login / security  
+add some animations ?
+loadings
 modal scroll on mobile not good
-gros text overflow en largeur sur mobile dans dedicated page
