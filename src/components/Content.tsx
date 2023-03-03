@@ -42,7 +42,7 @@ const Content = () => {
                 setCurrentPage(index + 1);
                 setTimeout(() => {
                   window.scrollTo({ top: 400, behavior: "smooth" });
-                }, 10);
+                }, 40);
               }}
             >
               {index + 1}
