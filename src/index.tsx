@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import ReactDOM from "react-dom/client";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import DedicatedPage from "./components/DedicatedPage";
 import LoginForm from "./components/LoginForm";
-// import Loading from "./components/Loading";
+import Loading from "./components/Loading";
 
 import "./style/index.css";
 
@@ -38,10 +38,11 @@ async function checkTokenValidity(token: string | null): Promise<boolean> {
 }
 
 const App = () => {
-  const { isLoggedIn, setIsLoggedIn } = useContext(PropertyAdsContext);
+  const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading } = useContext(PropertyAdsContext);
   const [isTokenValid, setIsTokenValid] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const token = localStorage.getItem("idToken");
 
     if (token) {
@@ -49,14 +50,20 @@ const App = () => {
         .then((isValidToken: boolean) => {
           setIsTokenValid(isValidToken);
           setIsLoggedIn(isValidToken);
+			    setIsLoading(false);
         })
         .catch((error: Error) => {
           console.error("Veuillez vous connecter : " + error);
         });
     } else {
       setIsTokenValid(false);
+			setIsLoading(false);
     }
-  }, [setIsLoggedIn]);
+  }, [setIsLoggedIn, setIsLoading]);
+
+	if (isLoading) {
+    return <Loading />;
+  }
 
   if (!isTokenValid && !isLoggedIn) {
     return <LoginForm />;
@@ -83,7 +90,10 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
+  // <React.StrictMode>
   <PropertyAdsContextProvider>
     <App />
   </PropertyAdsContextProvider>
+  // </React.StrictMode>
+
 );

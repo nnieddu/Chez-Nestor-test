@@ -8,7 +8,11 @@ export default function Header() {
       <img
         className="absolute shadow-lg inset-0 -z-10 h-full w-full object-cover brightness-50"
         src={backgroundHeaderImg}
-        alt="Living room background"
+        alt=""
+				onLoad={(e) => {
+					const imgElement = e.target as HTMLImageElement;
+					imgElement.alt = "Living room background";
+				}}
       />
       <h2 className="text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
         Chez-Nestor Immo

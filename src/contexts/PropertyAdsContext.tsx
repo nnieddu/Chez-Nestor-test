@@ -8,7 +8,9 @@ type PropertyAdsContextType = {
   deletePropertyAd: (documentId: string) => void;
   error: Error | null;
   isLoggedIn: Boolean;
+  isLoading: Boolean;
   setIsLoggedIn: (isLogged: boolean) => void;
+  setIsLoading: (isLogged: boolean) => void;
 };
 
 export const PropertyAdsContext = createContext<PropertyAdsContextType>({
@@ -18,13 +20,16 @@ export const PropertyAdsContext = createContext<PropertyAdsContextType>({
   deletePropertyAd: () => {},
   error: null,
   isLoggedIn: false,
+  isLoading: false,
   setIsLoggedIn: () => {},
+  setIsLoading: () => {},
 });
 
 const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [propertyAds, setPropertyAds] = useState<PropertyAd[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const idToken = localStorage.getItem("idToken");
 
   useEffect(() => {
@@ -52,7 +57,6 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
         setPropertyAds(propertyAds);
       }
     }
-		console.log("koko")
     getData();
   }, [idToken]);
 
@@ -140,6 +144,8 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
         error,
         isLoggedIn,
         setIsLoggedIn,
+        isLoading,
+				setIsLoading,
       }}
     >
       {children}

@@ -15,8 +15,7 @@ interface LoginResponse {
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const { setIsLoggedIn } = useContext(PropertyAdsContext);
+  const { setIsLoggedIn, isLoading, setIsLoading } = useContext(PropertyAdsContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,7 +23,6 @@ const LoginForm = () => {
     try {
       const response = await fetch(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAAltWO-fGFPs41sJe6YyIlV59hIT7MuZU`,
-        // `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
