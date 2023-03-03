@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import DedicatedPage from "./components/DedicatedPage";
 import LoginForm from "./components/LoginForm";
+import Loading from "./components/Loading";
 
 import "./style/index.css";
 
@@ -62,10 +63,10 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/ChezNestorImmo">
       <Routes>
         <Route
-          path="/ChezNestorImmo"
+          path="/"
           element={
             <>
               <Header />
