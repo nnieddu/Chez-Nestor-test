@@ -77,7 +77,7 @@ const App = () => {
         <Route path="/property/:id" element={<DedicatedPage />} />
         <Route path="*" element={<Navigate to="/ChezNestorImmo" />} />
       </Routes>
-    </HashRouter>
+    </HashRouter> 
   );
 };
 
