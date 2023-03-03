@@ -7,6 +7,8 @@ type PropertyAdsContextType = {
   updatePropertyAd: (propertyAd: PropertyAd) => void;
   deletePropertyAd: (documentId: string) => void;
   error: Error | null;
+  isLoggedIn: Boolean;
+  setIsLoggedIn: (isLogged: boolean) => void;
 };
 
 export const PropertyAdsContext = createContext<PropertyAdsContextType>({
@@ -15,16 +17,25 @@ export const PropertyAdsContext = createContext<PropertyAdsContextType>({
   updatePropertyAd: () => {},
   deletePropertyAd: () => {},
   error: null,
+  isLoggedIn: false,
+  setIsLoggedIn: () => {},
 });
 
 const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [propertyAds, setPropertyAds] = useState<PropertyAd[]>([]);
   const [error, setError] = useState<Error | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
+  const idToken = localStorage.getItem("idToken");
 
   useEffect(() => {
     async function getData() {
       const response = await fetch(
-        "https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/"
+        "https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/",
+        {
+          headers: {
+            Authorization: `Bearer ${idToken}`,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -42,7 +53,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
       }
     }
     getData();
-  }, []);
+  }, [idToken]);
 
   const addPropertyAd = async (propertyAd: PropertyAdFirebase) => {
     try {
@@ -52,6 +63,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+						Authorization: `Bearer ${idToken}`,
           },
           body: JSON.stringify({
             fields: propertyAd,
@@ -71,50 +83,62 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
     }
   };
 
-	const updatePropertyAd = async (updatedPropertyAd: PropertyAd) => {
-		try {
-			const { documentId, ...updatedFields } = updatedPropertyAd;
-			const response = await fetch(
-				`https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`,
-				{
-					method: "PATCH",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						fields: updatedFields,
-					}),
-				}
-			);
-			if (!response.ok) {
-				const error = new Error(`Error : ${response.status}`);
-				throw error;
-			} else {
-				const updatedPropertyAds = propertyAds.map((propertyAd) =>
-					propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
-				);
-				setPropertyAds(updatedPropertyAds);
-			}
-		} catch (error) {
-			// setError(error);
-		}
-	};
+  const updatePropertyAd = async (updatedPropertyAd: PropertyAd) => {
+    try {
+      const { documentId, ...updatedFields } = updatedPropertyAd;
+      const response = await fetch(
+        `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+          body: JSON.stringify({
+            fields: updatedFields,
+          }),
+        }
+      );
+      if (!response.ok) {
+        const error = new Error(`Error : ${response.status}`);
+        throw error;
+      } else {
+        const updatedPropertyAds = propertyAds.map((propertyAd) =>
+          propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
+        );
+        setPropertyAds(updatedPropertyAds);
+      }
+    } catch (error) {
+      // setError(error);
+    }
+  };
 
   const deletePropertyAd = async (documentId: string | undefined) => {
     const url = `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`;
     const response = await fetch(url, {
       method: "DELETE",
+			headers: {
+				Authorization: `Bearer ${idToken}`,
+			},
     });
     if (!response.ok) {
       throw new Error("Failed to delete document");
     }
-		setPropertyAds(propertyAds.filter(ad => ad.documentId !== documentId));
+    setPropertyAds(propertyAds.filter((ad) => ad.documentId !== documentId));
     // return response.json();
   };
 
   return (
     <PropertyAdsContext.Provider
-      value={{ propertyAds, addPropertyAd, updatePropertyAd, deletePropertyAd, error }}
+      value={{
+        propertyAds,
+        addPropertyAd,
+        updatePropertyAd,
+        deletePropertyAd,
+        error,
+        isLoggedIn,
+        setIsLoggedIn,
+      }}
     >
       {children}
     </PropertyAdsContext.Provider>
