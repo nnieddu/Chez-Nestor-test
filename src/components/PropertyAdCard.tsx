@@ -26,7 +26,6 @@ const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
               target.alt = "Default image";
             }}
           />
-
           <div className="flex flex-col justify-around p-4 lg:pl-4">
             <h2 className="ml-1 text-gray-900 font-bold text-2xl titleEllipsized">
               {propertyAd.title.stringValue}
