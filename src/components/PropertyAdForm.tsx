@@ -56,57 +56,69 @@ const PropertyAdForm = ({ setIsModalOpen, isEdit, propertyAd }: PropertyAdFormPr
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col ">
-      <label className="mt-2 font-semibold">Titre</label>
+    <form onSubmit={handleSubmit} className="flex flex-col">
+      {/* <label className="mt-6 font-semibold">Titre</label> */}
       <input
         required
+				placeholder="Titre de votre annonce"
+				maxLength={150}
         name="title"
         type="text"
         value={formData.title.stringValue}
         onChange={handleChange}
-        className="border rounded-md p-2"
+        className="mt-6 border rounded-md p-2 placeholder-gray-500"
       />
 
-      <label className="mt-2 font-semibold">Description</label>
+      {/* <label className="mt-2 font-semibold">Déscription</label> */}
       <textarea
         required
+				placeholder="Déscription de votre annonce..."
+				maxLength={3500}
         name="description"
         value={formData.description.stringValue}
         onChange={handleChange}
-        className="border rounded-md p-2 resize-none"
+        className="mt-2 border rounded-md p-2 resize-none  min-h-[30vh] placeholder-gray-500"
       />
 
-      <label className="mt-2 font-semibold">Image (URL)</label>
+      {/* <label className="mt-2 font-semibold">Image (URL)</label> */}
       <input
         required
+				placeholder="Image (URL)"
+				maxLength={600}
         name="img"
         type="text"
         value={formData.img.stringValue}
         onChange={handleChange}
-        className="border rounded-md p-2"
+        className="mt-2 border rounded-md p-2 placeholder-gray-500"
       />
 
-      <label className="mt-2 font-semibold">Prix</label>
+      {/* <label className="mt-3 font-semibold">Prix en €</label> */}
+      <label className="mt-3 ml-1 font-semibold">Prix</label>
       <input
         required
         name="price"
         type="number"
+				max={9999999999999}
+				step={100}
         value={formData.price.stringValue}
         onChange={handleChange}
-        className="border rounded-md p-2"
+        className="mt-1 border rounded-md p-2"
       />
-      <button
-        type="submit"
-        className="mt-4 px-4 py-2 rounded-md bg-green-400 hover:bg-green-500 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 w-full sm:w-auto"
-      >
-        Publier
-      </button>
-      <button
-        className="mt-4 px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-400 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 w-full sm:w-auto"
-        onClick={() => setIsModalOpen(false)}
-      >
-        Annuler
-      </button>
+      <div className="mt-6 flex justify-end">
+        <button
+          type="submit"
+          className="w-full inline-flex justify-center mr-5 rounded-md border border-gray-300 shadow px-4 py-2 text-base font-medium text-black-700 bg-green-400 hover:bg-green-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+        >
+          Publier
+        </button>
+        <button
+          type="button"
+          className="w-full inline-flex justify-center rounded-md border border-gray-300 shadow px-4 py-2 text-base font-medium text-black-700 bg-gray-100 hover:bg-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+          onClick={() => setIsModalOpen(false)}
+        >
+          Annuler
+        </button>
+      </div>
     </form>
   );
 };

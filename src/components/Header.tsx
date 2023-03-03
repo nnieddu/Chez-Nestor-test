@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faHouseUser } from "@fortawesome/free-solid-svg-icons";
 import backgroundHeaderImg from "../style/backgroundHeader.jpg";
 
 export default function Header() {
   return (
-    <div className="relative py-32">
+    <div className="relative py-28 shadow-2xl">
       <img
         className="absolute shadow-lg inset-0 -z-10 h-full w-full object-cover brightness-50"
         src={backgroundHeaderImg}
@@ -12,7 +12,9 @@ export default function Header() {
       />
       <h2 className="text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
         Chez-Nestor Immo
-        <FontAwesomeIcon className="ml-5" icon={faHouse} />
+				<br></br>
+				<br></br>
+        <FontAwesomeIcon className="ml-5" icon={faHouseUser} />
       </h2>
     </div>
   );

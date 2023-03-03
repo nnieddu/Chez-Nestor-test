@@ -15,13 +15,13 @@ const Content = () => {
   );
 
   return (
-    <div className="mx-28 flex flex-col">
+    <div className="flex flex-col">
       <button
         onClick={() => setIsModalOpen(true)}
-        className="px-3 mx-auto my-5 py-2 bg-chezNestor hover:bg-chezNestorDark text-white font-bold uppercase rounded"
+        className="px-3 mx-auto mt-10 my-5 py-2 bg-chezNestor hover:bg-chezNestorDark text-white font-bold uppercase rounded lg:text-xl shadow-lg"
       >
         Ajouter une annonce
-        <FontAwesomeIcon className="ml-5" icon={faSquarePlus} />
+        <FontAwesomeIcon className="ml-5 " icon={faSquarePlus} />
       </button>
       {sortedPropertyAds.map((propertyAd, index) => (
         <PropertyAdCard key={index} propertyAd={propertyAd} />

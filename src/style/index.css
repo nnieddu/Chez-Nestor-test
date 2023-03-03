@@ -36,3 +36,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.ellipsized {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+	overflow-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.leftArrow {
+	position: fixed;
+	color: rgba(126, 205, 197, 0.8);
+}
+.leftArrow:hover {
+	color: rgba(126, 205, 197, 1);
+}

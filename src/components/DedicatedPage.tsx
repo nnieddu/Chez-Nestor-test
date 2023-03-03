@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import backgroundHeaderImg from "../style/backgroundHeader.jpg";
+import defaultImage from "../style/no-photo.svg";
 import Modal from "./Modal";
 
 const DedicatedPage = () => {
@@ -15,7 +16,13 @@ const DedicatedPage = () => {
   const propertyAd = propertyAds.find((ad) => ad.documentId === id);
   const { deletePropertyAd } = useContext(PropertyAdsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imgSrc, setImgSrc] = useState<string | undefined>(propertyAd?.img.stringValue);
   const navigate = useNavigate();
+
+  useEffect(() => {
+		if (propertyAd)
+    	setImgSrc(propertyAd.img.stringValue);
+  }, [propertyAd]);
 
   if (!propertyAd) {
     return (
@@ -26,14 +33,14 @@ const DedicatedPage = () => {
           alt="Living room background"
         />
         <h2 className="py-32 text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
-          Erreur 404 : <br/>  {id}  <br/> annonce non trouvée !...
+          Erreur 404 : <br /> {id} <br /> annonce non trouvée !...
         </h2>
       </div>
     );
   }
 
   return (
-    <div className="my-6">
+    <div>
       {isModalOpen && (
         <Modal
           isModalOpen={isModalOpen}
@@ -43,26 +50,24 @@ const DedicatedPage = () => {
         />
       )}
       <FontAwesomeIcon
-        className="absolute cursor-pointer fa-6x ml-5"
-				style={{color: "#7dccc4"}}
+        className="flex absolute cursor-pointer fa-4x max-w-[40px] sm:max-w-[60px] ml-3 mt-3 leftArrow "
         onClick={() => {
           navigate(-1);
         }}
         icon={faArrowCircleLeft}
       />
-      <div className="flex flex-col lg:flex-row bg-cardColor shadow-lg rounded-lg overflow-hidden">
-        <div
-          className="h-48 lg:h-auto lg:w-48 flex-none bg-cover bg-center rounded-t-lg lg:rounded-t-none lg:rounded-l-lg overflow-hidden"
-          style={{
-            backgroundImage: `url(${propertyAd.img.stringValue})`,
-            minWidth: "8rem",
-          }}
-        ></div>
-        <div className="flex flex-col p-4 lg:pl-4 justify-between">
-          <h2 className="text-gray-900 font-bold text-2xl">
+      <div className="flex flex-col">
+        <img
+          className="rounded-b-lg shadow-lg inset-0 -z-10 max-h-[100vh] object-cover m-auto shadow-lg"
+          src={imgSrc}
+          alt="Living room background"
+          onError={() => setImgSrc(defaultImage)}
+        />
+        <div className="mt-5 bg-cardColor shadow-lg rounded-lg mb-6 flex flex-col p-4 lg:pl-4 mt-[2%] sm:mx-[10vw] max-w-full whitespace-pre-line overflow-hidden">
+          <h2 className="mb-2 text-gray-900 font-bold text-2xl">
             {propertyAd.title.stringValue}
           </h2>
-          <p className="mt-2 text-gray-600 text-sm">
+          <p className="mt-2 text-gray-600 text-sm max-w-full whitespace-pre-line overflow-hidden">
             {propertyAd.description.stringValue}
           </p>
           <div className="flex mt-6">
@@ -73,9 +78,9 @@ const DedicatedPage = () => {
           <div className="mt-6 items-center">
             <button
               onClick={() => setIsModalOpen(true)}
-              className="px-3 py-2 bg-chezNestor hover:bg-chezNestorDark text-white text-s mr-3 lg:mr-6 font-bold rounded"
+              className="mt-5 px-3 py-2 bg-chezNestor hover:bg-chezNestorDark text-white text-s mr-3 lg:mr-6 font-bold rounded"
             >
-              Editer
+              Éditer
               <FontAwesomeIcon className="ml-5" icon={faPenToSquare} />
             </button>
             <button
@@ -83,7 +88,7 @@ const DedicatedPage = () => {
                 deletePropertyAd(propertyAd.documentId);
                 navigate(-1);
               }}
-              className="px-3 py-2 bg-chezNestor hover:bg-chezNestorDark text-white text-s lg:ml-6 font-bold rounded"
+              className="px-3 py-2 mt-5 bg-chezNestor hover:bg-chezNestorDark text-white text-s lg:ml-6 font-bold rounded"
             >
               Supprimer
               <FontAwesomeIcon className="ml-5" icon={faTrashCan} />

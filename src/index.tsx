@@ -13,21 +13,21 @@ import "./style/index.css";
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
-  <PropertyAdsContextProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Header />
-              <Content />
-            </>
-          }
-        />
-        <Route path="/property/:id" element={<DedicatedPage />} />
-      </Routes>
-    </BrowserRouter>
-  </PropertyAdsContextProvider>
+    <PropertyAdsContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/apparts"
+            element={
+              <>
+                <Header />
+                <Content />
+              </>
+            }
+          />
+          <Route path="/property/:id" element={<DedicatedPage />} />
+        </Routes>
+      </BrowserRouter>
+    </PropertyAdsContextProvider>
   </React.StrictMode>
 );
