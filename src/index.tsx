@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import PropertyAdsContextProvider from "./contexts/PropertyAdsContext";
 import { PropertyAdsContext } from "./contexts/PropertyAdsContext";
@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import Content from "./components/Content";
 import DedicatedPage from "./components/DedicatedPage";
 import LoginForm from "./components/LoginForm";
-import Loading from "./components/Loading";
+// import Loading from "./components/Loading";
 
 import "./style/index.css";
 
@@ -63,7 +63,7 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter basename="/ChezNestorImmo">
+    <HashRouter>
       <Routes>
         <Route
           path="/"
@@ -77,7 +77,7 @@ const App = () => {
         <Route path="/property/:id" element={<DedicatedPage />} />
         <Route path="*" element={<Navigate to="/ChezNestorImmo" />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

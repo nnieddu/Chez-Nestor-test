@@ -13,7 +13,7 @@ Les appartements sont triés par ordre alphabétique et il est possible de les a
 
 Cette application a été conçue en React/Typescript, utilise React Context pour gérer l'état de l'application, React Router pour la navigation et Tailwind (+ icônes de fontawesome) pour le style.  
   
-La liste des tâches est stockée dans une source de données externe : Firebase (Firestore Database).  
+La liste des tâches est stockée dans une source de données externe : Firebase (Firestore Database), en utilisant l'API REST.  
 L'application est déployée sur github page.  
   
 ---
