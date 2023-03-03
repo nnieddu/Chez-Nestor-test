@@ -40,10 +40,10 @@ const Content = () => {
                 index + 1 === currentPage ? "bg-chezNestor text-white" : "text-chezNestor"
               }`}
               onClick={() => {
+                setCurrentPage(index + 1);
                 setTimeout(() => {
                   window.scrollTo({ top: 400, behavior: "smooth" });
                 }, 10);
-                setCurrentPage(index + 1);
               }}
             >
               {index + 1}
