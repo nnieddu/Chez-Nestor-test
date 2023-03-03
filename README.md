@@ -21,7 +21,6 @@ Une fois sur la page dédie d'une annonce :
 
 
 --------------
-pagination si beacoup d'annonces  
 login / security  
 add some animations ?
 loadings

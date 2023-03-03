@@ -6,12 +6,18 @@ import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
+const ITEMS_PER_PAGE = 5; // Number of items to display per page
+
 const Content = () => {
   const { propertyAds } = useContext(PropertyAdsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1); // Current page number
 
-  const sortedPropertyAds = [...propertyAds].sort((a, b) =>
-    a.title.stringValue.localeCompare(b.title.stringValue)
+  const totalPages = Math.ceil(propertyAds.length / ITEMS_PER_PAGE);
+  // Filter the propertyAds array based on the current page number and items per page
+  const filteredPropertyAds = propertyAds.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
   );
 
   return (
@@ -23,10 +29,32 @@ const Content = () => {
         Ajouter une annonce
         <FontAwesomeIcon className="ml-5 " icon={faSquarePlus} />
       </button>
-      {sortedPropertyAds.map((propertyAd, index) => (
+      {filteredPropertyAds.map((propertyAd, index) => (
         <PropertyAdCard key={index} propertyAd={propertyAd} />
       ))}
-      {isModalOpen && <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={false} />}
+
+      {totalPages > 1 && (
+        <div className="flex justify-center m-8">
+          {[...Array(totalPages)].map((_, index) => (
+            <button
+              key={index}
+              className={`px-2 py-1 mx-1 min-w-[30px] border-chezNestor border rounded-lg ${
+                index + 1 === currentPage ? "bg-chezNestor text-white" : "text-chezNestor"
+              }`}
+              onClick={() => {
+                window.scrollTo({ top: 400, behavior: "smooth" })
+                setCurrentPage(index + 1);
+              }}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {isModalOpen && (
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} isEdit={false} />
+      )}
     </div>
   );
 };

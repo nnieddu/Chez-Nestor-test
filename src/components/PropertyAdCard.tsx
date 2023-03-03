@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import { PropertyAd } from "../types/propertyAdTypes";
 import { Link } from "react-router-dom";
 
@@ -12,18 +11,24 @@ interface PropertyAdCardProps {
 }
 
 export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
-	const [imgSrc, setImgSrc] = useState<string | undefined>(propertyAd?.img.stringValue);
+  const [imgSrc, setImgSrc] = useState<string | undefined>(
+    propertyAd?.img.stringValue
+  );
 
   return (
-		<div className="my-6 mx-[5vw]">
-				<Link to={`/property/${propertyAd.documentId}`} onClick={() => window.scrollTo(0, 0)}>
+    <div className="my-6 mx-[5vw]">
+      <Link
+        to={`/property/${propertyAd.documentId}`}
+        onClick={() => window.scrollTo(0, 0)}
+      >
         <div className="flex flex-col lg:flex-row h-50 lg:h-80 bg-cardColor shadow-lg rounded-lg overflow-hidden">
-        <img
-          className="lg:max-h-[100%] lg:min-w-[25vw] lg:max-w-[25vw] w-full max-h-[25vh] object-cover"
-          src={imgSrc}
-          alt="Living room background"
-					onError={() => setImgSrc(defaultImage)}
-        />
+          <img
+            className="lg:min-w-[25vw] lg:h-[100%] object-cover"
+            style={{ width: "300px", height: "100%" }}
+            src={imgSrc}
+            alt="Living room background"
+            onError={() => setImgSrc(defaultImage)}
+          />
           <div className="flex flex-col p-4 lg:pl-4 whitespace-pre-line ellipsized">
             <h2 className="ml-1 text-gray-900 font-bold text-2xl titleEllipsized">
               {propertyAd.title.stringValue}
@@ -44,8 +49,8 @@ export const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
             </div>
           </div>
         </div>
-    </Link>
-      </div>
+      </Link>
+    </div>
   );
 };
 
