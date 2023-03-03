@@ -15,10 +15,9 @@ const Content = () => {
 
   const totalPages = Math.ceil(propertyAds.length / ITEMS_PER_PAGE);
   // Filter the propertyAds array based on the current page number and items per page
-  const filteredPropertyAds = propertyAds.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  const filteredPropertyAds = [...propertyAds]
+    .sort((a, b) => a.title.stringValue.localeCompare(b.title.stringValue))
+    .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
     <div className="flex flex-col">
@@ -32,7 +31,6 @@ const Content = () => {
       {filteredPropertyAds.map((propertyAd, index) => (
         <PropertyAdCard key={index} propertyAd={propertyAd} />
       ))}
-
       {totalPages > 1 && (
         <div className="flex justify-center m-8">
           {[...Array(totalPages)].map((_, index) => (
@@ -42,7 +40,9 @@ const Content = () => {
                 index + 1 === currentPage ? "bg-chezNestor text-white" : "text-chezNestor"
               }`}
               onClick={() => {
-                window.scrollTo({ top: 400, behavior: "smooth" })
+                setTimeout(() => {
+                  window.scrollTo({ top: 400, behavior: "smooth" });
+                }, 10);
                 setCurrentPage(index + 1);
               }}
             >
