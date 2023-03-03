@@ -11,13 +11,22 @@ interface PropertyAdCardProps {
 const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
   return (
     <div className="my-6 mx-[5vw]">
-      <Link to={`/property/${propertyAd.documentId}`} onClick={() => window.scrollTo(0, 0)}>
+      <Link
+        to={`/property/${propertyAd.documentId}`}
+        onClick={() => window.scrollTo(0, 0)}
+      >
         <div className="flex flex-col lg:flex-row h-50 lg:h-80 bg-cardColor shadow-lg rounded-lg overflow-hidden">
           <img
             className="lg:max-h-[100%] lg:min-w-[25vw] lg:max-w-[25vw] w-full max-h-[25vh] object-cover"
             src={propertyAd.img.stringValue ?? defaultImage}
             alt="Living room background"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = defaultImage;
+              target.alt = "Default image";
+            }}
           />
+
           <div className="flex flex-col justify-around p-4 lg:pl-4">
             <h2 className="ml-1 text-gray-900 font-bold text-2xl titleEllipsized">
               {propertyAd.title.stringValue}
