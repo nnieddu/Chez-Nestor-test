@@ -37,14 +37,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.titleEllipsized {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 1;
+	overflow-wrap: break-word;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 .ellipsized {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 7;
 	overflow-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.wordBreak {
+	overflow-wrap: break-word;
+  overflow: hidden;
+}
+
 
 .leftArrow {
 	position: fixed;

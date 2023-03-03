@@ -56,18 +56,18 @@ const DedicatedPage = () => {
         }}
         icon={faArrowCircleLeft}
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col whitespace-pre-line wordBreak">
         <img
           className="rounded-b-lg shadow-lg inset-0 -z-10 max-h-[100vh] object-cover m-auto shadow-lg"
           src={imgSrc}
           alt="Living room background"
           onError={() => setImgSrc(defaultImage)}
         />
-        <div className="mt-5 bg-cardColor shadow-lg rounded-lg mb-6 flex flex-col p-4 lg:pl-4 mt-[2%] sm:mx-[10vw] max-w-full whitespace-pre-line overflow-hidden">
+        <div className="mt-5 bg-cardColor shadow-lg rounded-lg mb-6 flex flex-col p-4 lg:pl-4 mt-[2%] sm:mx-[10vw] max-w-full">
           <h2 className="mb-2 text-gray-900 font-bold text-2xl">
             {propertyAd.title.stringValue}
           </h2>
-          <p className="mt-2 text-gray-600 text-sm max-w-full whitespace-pre-line overflow-hidden">
+          <p className="mt-2 text-gray-600 text-sm max-w-full">
             {propertyAd.description.stringValue}
           </p>
           <div className="flex mt-6">
