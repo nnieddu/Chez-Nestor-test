@@ -1,13 +1,14 @@
 import { useEffect, useContext, useState } from "react";
-import { useParams } from "react-router-dom";
-import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
 import backgroundHeaderImg from "../style/backgroundHeader.jpg";
 import defaultImage from "../style/no-photo.svg";
+
+import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 import Modal from "./Modal";
 
 const DedicatedPage = () => {
@@ -20,8 +21,7 @@ const DedicatedPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-		if (propertyAd)
-    	setImgSrc(propertyAd.img.stringValue);
+    if (propertyAd) setImgSrc(propertyAd.img.stringValue);
   }, [propertyAd]);
 
   if (!propertyAd) {

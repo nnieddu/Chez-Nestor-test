@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 import PropertyAdCard from "./PropertyAdCard";
 import Modal from "./Modal";
@@ -6,15 +6,14 @@ import Modal from "./Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
-const ITEMS_PER_PAGE = 5; // Number of items to display per page
+const ITEMS_PER_PAGE = 5;
 
 const Content = () => {
   const { propertyAds } = useContext(PropertyAdsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1); // Current page number
+  const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(propertyAds.length / ITEMS_PER_PAGE);
-  // Filter the propertyAds array based on the current page number and items per page
   const filteredPropertyAds = [...propertyAds]
     .sort((a, b) => a.title.stringValue.localeCompare(b.title.stringValue))
     .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);

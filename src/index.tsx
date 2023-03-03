@@ -14,15 +14,14 @@ import LoginForm from "./components/LoginForm";
 import "./style/index.css";
 
 async function checkTokenValidity(token: string | null): Promise<boolean> {
-	if (token == null)
-		return false;
+  if (token == null) return false;
 
   const response = await fetch(
     `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyAAltWO-fGFPs41sJe6YyIlV59hIT7MuZU`,
     {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         idToken: token,
@@ -33,11 +32,10 @@ async function checkTokenValidity(token: string | null): Promise<boolean> {
     throw new Error(`Error: ${response.status}`);
   }
   const data = await response.json();
-  if (data.hasOwnProperty('error'))
-    return false;
-	return true;
+  if (data.hasOwnProperty("error")) return false;
+  return true;
 }
-	
+
 const App = () => {
   const { isLoggedIn, setIsLoggedIn } = useContext(PropertyAdsContext);
   const [isTokenValid, setIsTokenValid] = useState(false);
@@ -84,7 +82,7 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
-    <PropertyAdsContextProvider>
-		<App />
-    </PropertyAdsContextProvider>
+  <PropertyAdsContextProvider>
+    <App />
+  </PropertyAdsContextProvider>
 );

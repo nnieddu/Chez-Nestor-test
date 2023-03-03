@@ -12,8 +12,7 @@ export default function Header() {
       />
       <h2 className="text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
         Chez-Nestor Immo
-				<br></br>
-				<br></br>
+				<br/><br/>
         <FontAwesomeIcon icon={faHouseUser} />
       </h2>
     </div>

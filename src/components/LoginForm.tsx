@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
+import Loading from "./Loading";
 import logo from "../style/logo.png";
 
 interface LoginResponse {
@@ -40,10 +41,10 @@ const LoginForm = () => {
       const data: LoginResponse = await response.json();
       setIsLoggedIn(true);
       localStorage.setItem("idToken", data.idToken);
-			<Navigate to="/ChezNestorImmo" />
+      <Navigate to="/ChezNestorImmo" />;
     } catch (error) {
       console.error(error);
-			//add error display for user
+      //add error display for user
       setIsLoggedIn(false);
     } finally {
       setIsLoading(false);
@@ -53,7 +54,7 @@ const LoginForm = () => {
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+			<Loading/>
       ) : (
         <div className="relative py-28  mt-[1%]">
           <img
@@ -94,7 +95,7 @@ const LoginForm = () => {
         <button className="bg-chezNestor hover:bg-chezNestorDark text-white rounded-lg py-2 px-4 hover:bg-blue-600">
           Login
         </button>
-				<br/>
+        <br />
       </form>
     </>
   );

@@ -52,6 +52,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
         setPropertyAds(propertyAds);
       }
     }
+		console.log("koko")
     getData();
   }, [idToken]);
 
@@ -123,6 +124,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
     });
     if (!response.ok) {
       throw new Error("Failed to delete document");
+      // setError(error);
     }
     setPropertyAds(propertyAds.filter((ad) => ad.documentId !== documentId));
     // return response.json();
