@@ -18,7 +18,6 @@ async function checkTokenValidity(token: string | null): Promise<boolean> {
   if (token == null) return false;
   
   const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
-  console.log(apiKey)
   
   const response = await fetch(
     `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${apiKey}`,
