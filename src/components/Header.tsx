@@ -4,7 +4,7 @@ import backgroundHeaderImg from "../style/backgroundHeader.jpg";
 
 export default function Header() {
   return (
-    <div className="relative py-28 shadow-2xl">
+    <div className="relative py-28 shadow-2xl opacityAnimHalf">
       <img
         className="absolute shadow-lg inset-0 -z-10 h-full w-full object-cover brightness-50"
         src={backgroundHeaderImg}

@@ -65,3 +65,19 @@ body {
 .leftArrow:hover {
 	color: rgba(126, 205, 197, 1);
 }
+
+@keyframes opacityTransi {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.opacityAnim {
+  animation: opacityTransi 0.8s linear;
+}
+.opacityAnimHalf {
+  animation: opacityTransi 0.4s linear;
+}

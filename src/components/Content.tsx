@@ -19,7 +19,7 @@ const Content = () => {
     .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col opacityAnim">
       <button
         onClick={() => setIsModalOpen(true)}
         className="px-3 mx-auto mt-10 my-5 py-2 bg-chezNestor hover:bg-chezNestorDark text-white font-bold uppercase rounded lg:text-xl shadow-lg"

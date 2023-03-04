@@ -26,21 +26,31 @@ const DedicatedPage = () => {
 
   if (!propertyAd) {
     return (
-      <div className="relative py-32">
-        <img
-          className="absolute shadow-lg inset-0 -z-10 h-full w-full object-cover brightness-50"
-          src={backgroundHeaderImg}
-          alt="Living room background"
+      <div className="opacityAnimHalf">
+        <FontAwesomeIcon
+          className="z-10 flex absolute cursor-pointer fa-4x max-w-[40px] sm:max-w-[60px] ml-3 mt-3 leftArrow "
+          onClick={() => {
+            navigate(-1);
+          }}
+          icon={faArrowCircleLeft}
         />
-        <h2 className="py-32 text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
-          Erreur 404 : <br /> {id} <br /> annonce non trouvée !...
-        </h2>
+        <div className="relative py-32">
+          <img
+            className="absolute shadow-lg inset-0 -z-10 h-full w-full object-cover brightness-50"
+            src={backgroundHeaderImg}
+            alt="Living room background"
+          />
+          <h2 className="py-32 text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
+            Erreur 404 : <br /> annonce non trouvée !...
+            {/* Erreur 404 : <br /> {id} <br /> annonce non trouvée !... */}
+          </h2>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="opacityAnim">
       {isModalOpen && (
         <Modal
           isModalOpen={isModalOpen}

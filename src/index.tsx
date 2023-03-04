@@ -16,7 +16,10 @@ import "./style/index.css";
 
 async function checkTokenValidity(token: string | null): Promise<boolean> {
   if (token == null) return false;
-
+  
+  const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+  console.log(apiKey)
+  
   const response = await fetch(
     `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyAAltWO-fGFPs41sJe6YyIlV59hIT7MuZU`,
     {
@@ -54,6 +57,7 @@ const App = () => {
         })
         .catch((error: Error) => {
           console.error("Veuillez vous connecter : " + error);
+    			setIsLoading(false);
         });
     } else {
       setIsTokenValid(false);

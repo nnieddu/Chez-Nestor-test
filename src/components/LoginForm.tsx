@@ -13,7 +13,7 @@ interface LoginResponse {
 }
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("");
+  const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
   const { setIsLoggedIn, isLoading, setIsLoading } = useContext(PropertyAdsContext);
 
@@ -27,7 +27,7 @@ const LoginForm = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            email: username,
+            email: email,
             password,
             returnSecureToken: true,
           }),
@@ -54,7 +54,7 @@ const LoginForm = () => {
       {isLoading ? (
 			<Loading/>
       ) : (
-        <div className="relative py-28  mt-[1%]">
+        <div className="relative py-28  mt-[1%] opacityAnimHalf ">
           <img
             className="m-auto absolute inset-0 -z-10 h-[18vh] lg:h-full object-cover brightness-50"
             src={logo}
@@ -68,15 +68,15 @@ const LoginForm = () => {
         }`}
         onSubmit={handleSubmit}
       >
-        <label className="text-gray-700 font-medium" htmlFor="username">
-          Username:
+        <label className="text-gray-700 font-medium" htmlFor="email">
+          Adresse mail:
         </label>
         <input
           className="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3"
-          id="username"
+          id="email"
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setemail(e.target.value)}
           required
         />
         <label className="text-gray-700 font-medium" htmlFor="password">
@@ -91,7 +91,7 @@ const LoginForm = () => {
           required
         />
         <button className="bg-chezNestor hover:bg-chezNestorDark text-white rounded-lg py-2 px-4 hover:bg-blue-600">
-          Login
+          Se connecter
         </button>
         <br />
       </form>

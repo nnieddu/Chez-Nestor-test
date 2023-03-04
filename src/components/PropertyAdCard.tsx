@@ -10,7 +10,7 @@ interface PropertyAdCardProps {
 
 const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
   return (
-    <div className="my-6 mx-[5vw]">
+    <div className="my-6 mx-[5vw] opacityAnimHalf">
       <Link
         to={`/property/${propertyAd.documentId}`}
         onClick={() => window.scrollTo(0, 0)}
