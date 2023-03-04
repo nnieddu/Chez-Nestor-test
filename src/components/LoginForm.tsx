@@ -20,9 +20,11 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+  const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+
     try {
       const response = await fetch(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAAltWO-fGFPs41sJe6YyIlV59hIT7MuZU`,
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

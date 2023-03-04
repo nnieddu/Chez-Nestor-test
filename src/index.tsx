@@ -21,7 +21,7 @@ async function checkTokenValidity(token: string | null): Promise<boolean> {
   console.log(apiKey)
   
   const response = await fetch(
-    `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyAAltWO-fGFPs41sJe6YyIlV59hIT7MuZU`,
+    `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${apiKey}`,
     {
       method: "POST",
       headers: {
