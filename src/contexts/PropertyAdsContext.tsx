@@ -11,6 +11,7 @@ type PropertyAdsContextType = {
   isLoading: Boolean;
   setIsLoggedIn: (isLogged: boolean) => void;
   setIsLoading: (isLogged: boolean) => void;
+  apiKey: string | undefined;
 };
 
 export const PropertyAdsContext = createContext<PropertyAdsContextType>({
@@ -23,6 +24,7 @@ export const PropertyAdsContext = createContext<PropertyAdsContextType>({
   isLoading: false,
   setIsLoggedIn: () => {},
   setIsLoading: () => {},
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
 });
 
 const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -31,6 +33,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const idToken = localStorage.getItem("idToken");
+  const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 
   useEffect(() => {
     async function getData() {
@@ -146,6 +149,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
         setIsLoggedIn,
         isLoading,
 				setIsLoading,
+        apiKey
       }}
     >
       {children}

@@ -20,7 +20,7 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-  const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+    const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 
     try {
       const response = await fetch(
@@ -80,6 +80,7 @@ const LoginForm = () => {
           value={email}
           onChange={(e) => setemail(e.target.value)}
           required
+          autoFocus
         />
         <label className="text-gray-700 font-medium" htmlFor="password">
           Password:

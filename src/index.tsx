@@ -3,8 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import PropertyAdsContextProvider from "./contexts/PropertyAdsContext";
-import { PropertyAdsContext } from "./contexts/PropertyAdsContext";
+import PropertyAdsContextProvider, { PropertyAdsContext } from "./contexts/PropertyAdsContext";
 
 import Header from "./components/Header";
 import Content from "./components/Content";
@@ -68,7 +67,7 @@ const App = () => {
     return <Loading />;
   }
 
-  if (!isTokenValid && !isLoggedIn) {
+  if (!isTokenValid && !isLoggedIn && !isLoading) {
     return <LoginForm />;
   }
 

@@ -37,14 +37,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.titleEllipsized {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 1;
-	overflow-wrap: break-word;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
 .ellipsized {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -76,8 +68,11 @@ body {
 }
 
 .opacityAnim {
-  animation: opacityTransi 0.8s linear;
+  animation: opacityTransi 0.6s linear;
 }
 .opacityAnimHalf {
-  animation: opacityTransi 0.4s linear;
+  animation: opacityTransi 0.3s linear;
+}
+.opacityAnimFast {
+  animation: opacityTransi 0.1s linear;
 }

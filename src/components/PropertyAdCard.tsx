@@ -27,7 +27,7 @@ const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
             }}
           />
           <div className="flex flex-col justify-around p-4 lg:pl-4">
-            <h2 className="ml-1 text-gray-900 font-bold text-2xl titleEllipsized">
+            <h2 className="ml-1 text-gray-900 font-bold text-2xl">
               {propertyAd.title.stringValue}
             </h2>
             <p className="mt-3 ml-1 text-gray-600 text-sm ellipsized">
