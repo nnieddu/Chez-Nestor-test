@@ -39,8 +39,7 @@ const LoginForm = () => {
       }
       const data: LoginResponse = await response.json();
       setIsLoggedIn(true);
-			document.cookie = `idToken=${data.idToken}; SameSite=None; Secure;`;
-			// document.cookie = `idToken=${data.idToken}; SameSite=None; Secure; HttpOnly`;
+      localStorage.setItem("idToken", data.idToken);
       <Navigate to="/ChezNestorImmo" />;
     } catch (error) {
       console.error(error);

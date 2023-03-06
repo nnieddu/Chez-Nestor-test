@@ -16,9 +16,7 @@ export async function checkTokenValidity(token: string | null, apikey : string |
     }
   );
   if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
+    throw new Error(`Erreur: ${response.status}`);
   }
-  const data = await response.json();
-  if (data.hasOwnProperty("error")) return false;
   return true;
 }

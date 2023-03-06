@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 import Header from "./Header";
 import Content from "./Content";
@@ -13,19 +12,12 @@ const App = () => {
   const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey } =
     useContext(PropertyAdsContext);
   const [isTokenValid, setIsTokenValid] = useState(false);
+	const uidToken = localStorage.getItem("idToken");
 
-  useEffect(() => {
+	useEffect(() => {
     setIsLoading(true);
-
-    const idToken = document.cookie
-      .split("; ")
-      .reduce(
-        (acc, cookie) => (cookie.startsWith("idToken=") ? cookie.split("=")[1] : acc),
-        ""
-      );
-
-    if (idToken) {
-      checkTokenValidity(idToken, apiKey)
+    if (uidToken) {
+      checkTokenValidity(uidToken, apiKey)
         .then((isValidToken: boolean) => {
           setIsTokenValid(isValidToken);
           setIsLoggedIn(isValidToken);
@@ -39,7 +31,7 @@ const App = () => {
       setIsTokenValid(false);
       setIsLoading(false);
     }
-  }, [setIsLoggedIn, setIsLoading, apiKey]);
+  }, [setIsLoggedIn, setIsLoading, apiKey, uidToken]);
 
   if (isLoading) {
     return <Loading />;
