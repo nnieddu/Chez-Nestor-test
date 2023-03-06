@@ -1,43 +1,47 @@
 import { useContext, useEffect, useState } from "react";
-
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
-
 import Header from "./Header";
 import Content from "./Content";
 import DedicatedPage from "./DedicatedAdPage";
 import LoginForm from "./credentials/LoginForm";
 import Loading from "./Loading";
-
 import { checkTokenValidity } from "./credentials/CheckTokenValidity";
 
 const App = () => {
-  const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey } = useContext(PropertyAdsContext);
+  const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey } =
+    useContext(PropertyAdsContext);
   const [isTokenValid, setIsTokenValid] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    const token = localStorage.getItem("idToken");
 
-    if (token) {
-      checkTokenValidity(token, apiKey)
+    const idToken = document.cookie
+      .split("; ")
+      .reduce(
+        (acc, cookie) => (cookie.startsWith("idToken=") ? cookie.split("=")[1] : acc),
+        ""
+      );
+
+    if (idToken) {
+      checkTokenValidity(idToken, apiKey)
         .then((isValidToken: boolean) => {
           setIsTokenValid(isValidToken);
           setIsLoggedIn(isValidToken);
-			    setIsLoading(false);
+          setIsLoading(false);
         })
         .catch((error: Error) => {
-          console.error("Veuillez vous connecter : " + error);
-    			setIsLoading(false);
+          console.error("Veuillez vous connecter : " + error.message);
+          setIsLoading(false);
         });
     } else {
       setIsTokenValid(false);
-			setIsLoading(false);
+      setIsLoading(false);
     }
   }, [setIsLoggedIn, setIsLoading, apiKey]);
 
-	if (isLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
@@ -60,7 +64,7 @@ const App = () => {
         <Route path="/property/:id" element={<DedicatedPage />} />
         <Route path="*" element={<Navigate to="/ChezNestorImmo" />} />
       </Routes>
-    </HashRouter> 
+    </HashRouter>
   );
 };
 

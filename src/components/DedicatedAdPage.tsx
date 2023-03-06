@@ -13,9 +13,8 @@ import Modal from "./addOrEdit/Modal";
 
 const DedicatedPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { propertyAds } = useContext(PropertyAdsContext);
+  const { propertyAds, deletePropertyAd } = useContext(PropertyAdsContext);
   const propertyAd = propertyAds.find((ad) => ad.documentId === id);
-  const { deletePropertyAd } = useContext(PropertyAdsContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [imgSrc, setImgSrc] = useState<string | undefined>(propertyAd?.img.stringValue);
   const navigate = useNavigate();
