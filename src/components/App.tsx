@@ -6,7 +6,7 @@ import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 
 import Header from "./Header";
 import Content from "./Content";
-import DedicatedPage from "./DedicatedPage";
+import DedicatedPage from "./DedicatedAdPage";
 import LoginForm from "./credentials/LoginForm";
 import Loading from "./Loading";
 

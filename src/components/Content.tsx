@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 import PropertyAdCard from "./PropertyAdCard";
-import Modal from "./Modal";
+import Modal from "./addOrEdit/Modal";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";

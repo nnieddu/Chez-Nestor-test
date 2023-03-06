@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import { PropertyAd, PropertyAdFirebase } from "../types/propertyAdTypes";
-import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
+import { PropertyAd, PropertyAdFirebase } from "../../types/propertyAdTypes";
+import { PropertyAdsContext } from "../../contexts/PropertyAdsContext";
 
 interface PropertyAdFormProps {
   setIsModalOpen: (isModalOpen: boolean) => void;

@@ -9,7 +9,7 @@ import backgroundHeaderImg from "../style/img/backgroundHeader.jpg";
 import defaultImage from "../style/img/no-photo.svg";
 
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
-import Modal from "./Modal";
+import Modal from "./addOrEdit/Modal";
 
 const DedicatedPage = () => {
   const { id } = useParams<{ id: string }>();
