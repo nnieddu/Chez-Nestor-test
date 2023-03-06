@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouseUser } from "@fortawesome/free-solid-svg-icons";
-import backgroundHeaderImg from "../style/backgroundHeader.jpg";
+import backgroundHeaderImg from "../style/img/backgroundHeader.jpg";
 
 export default function Header() {
   return (

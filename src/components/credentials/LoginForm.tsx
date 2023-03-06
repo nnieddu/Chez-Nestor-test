@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
-import Loading from "./Loading";
-import logo from "../style/logo.png";
+import { PropertyAdsContext } from "../../contexts/PropertyAdsContext";
+import Loading from "../Loading";
+import logo from "../../style/img/logo.png";
 
 interface LoginResponse {
   idToken: string;
@@ -15,12 +15,11 @@ interface LoginResponse {
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoggedIn, isLoading, setIsLoading } = useContext(PropertyAdsContext);
+  const { setIsLoggedIn, isLoading, setIsLoading, apiKey } = useContext(PropertyAdsContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
 
     try {
       const response = await fetch(

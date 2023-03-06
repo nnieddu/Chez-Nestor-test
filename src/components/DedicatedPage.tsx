@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
-import backgroundHeaderImg from "../style/backgroundHeader.jpg";
-import defaultImage from "../style/no-photo.svg";
+import backgroundHeaderImg from "../style/img/backgroundHeader.jpg";
+import defaultImage from "../style/img/no-photo.svg";
 
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 import Modal from "./Modal";

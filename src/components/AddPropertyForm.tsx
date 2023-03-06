@@ -8,8 +8,7 @@ interface PropertyAdFormProps {
   propertyAd?: PropertyAd;
 }
 const PropertyAdForm = ({ setIsModalOpen, isEdit, propertyAd }: PropertyAdFormProps) => {
-  const { addPropertyAd } = useContext(PropertyAdsContext);
-  const { updatePropertyAd } = useContext(PropertyAdsContext);
+  const { addPropertyAd, updatePropertyAd } = useContext(PropertyAdsContext);
   const [formData, setFormData] = useState<PropertyAdFirebase>({
     description: { stringValue: propertyAd?.description.stringValue ?? "" },
     img: { stringValue: propertyAd?.img.stringValue ?? "" },

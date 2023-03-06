@@ -2,7 +2,7 @@ import { PropertyAd } from "../types/propertyAdTypes";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import defaultImage from "../style/no-photo.svg";
+import defaultImage from "../style/img/no-photo.svg";
 
 interface PropertyAdCardProps {
   propertyAd: PropertyAd;

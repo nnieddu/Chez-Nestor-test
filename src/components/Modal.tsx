@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import PropertyAdForm from "./PropertyAdForm";
+import PropertyAdForm from "./AddPropertyForm";
 import { PropertyAd } from "../types/propertyAdTypes";
 
 interface ModalProps {

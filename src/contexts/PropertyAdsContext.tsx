@@ -1,7 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
-import { PropertyAd, PropertyAdFirebase } from "../types/propertyAdTypes";
+import {  PropertyAd, PropertyAdFirebase } from "../types/propertyAdTypes";
 
-type PropertyAdsContextType = {
+import { getAllAd } from "./propertyAdFunctions/getAllAd";
+import { addPropertyAdAPI } from "./propertyAdFunctions/addPropertyAdd";
+import { updatePropertyAdAPI } from "./propertyAdFunctions/updatePropertyAd";
+import { deletePropertyAdAPI } from './propertyAdFunctions/deletePropertyAd';
+
+export type PropertyAdsContextType = {
   propertyAds: PropertyAd[];
   addPropertyAd: (propertyAd: PropertyAdFirebase) => void;
   updatePropertyAd: (propertyAd: PropertyAd) => void;
@@ -24,7 +29,7 @@ export const PropertyAdsContext = createContext<PropertyAdsContextType>({
   isLoading: false,
   setIsLoggedIn: () => {},
   setIsLoading: () => {},
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: undefined,
 });
 
 const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -33,108 +38,23 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
   const [isLoading, setIsLoading] = useState(false);
   const idToken = localStorage.getItem("idToken");
-  const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+  const fireProject = "cheznestor-bd113";
+  const firebaseUrl = `https://firestore.googleapis.com/v1/projects/${fireProject}/databases/(default)/documents/propertyAd`;
 
-  useEffect(() => {
-    async function getData() {
-      const response = await fetch(
-        "https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/",
-        {
-          headers: {
-            Authorization: `Bearer ${idToken}`,
-          },
-        }
-      );
-
-      if (!response.ok) {
-        const error = new Error(`Error : ${response.status}`);
-        setError(error);
-      } else {
-        const data = await response.json();
-        const propertyAds = data.documents.map((doc: any) => {
-          const fields = doc.fields;
-          const documentId = doc.name.split("/").pop();
-          const propertyAd = { ...fields, documentId };
-          return propertyAd;
-        });
-        setPropertyAds(propertyAds);
-      }
-    }
-    getData();
-  }, [idToken]);
+	useEffect(() => {
+		getAllAd(firebaseUrl, idToken, setPropertyAds, setError);
+	}, [idToken, firebaseUrl]);
 
   const addPropertyAd = async (propertyAd: PropertyAdFirebase) => {
-    try {
-      const response = await fetch(
-        "https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-						Authorization: `Bearer ${idToken}`,
-          },
-          body: JSON.stringify({
-            fields: propertyAd,
-          }),
-        }
-      );
-      if (!response.ok) {
-        const error = new Error(`Error : ${response.status}`);
-        throw error;
-      } else {
-        const data = await response.json();
-        const addedPropertyAd = { ...propertyAd, documentId: data.name.split("/").pop() };
-        setPropertyAds((prevPropertyAds) => [addedPropertyAd, ...prevPropertyAds]);
-      }
-    } catch (error) {
-      // setError(error);
-    }
+		addPropertyAdAPI(propertyAd, firebaseUrl, idToken, setPropertyAds);
   };
 
   const updatePropertyAd = async (updatedPropertyAd: PropertyAd) => {
-    try {
-      const { documentId, ...updatedFields } = updatedPropertyAd;
-      const response = await fetch(
-        `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${idToken}`,
-          },
-          body: JSON.stringify({
-            fields: updatedFields,
-          }),
-        }
-      );
-      if (!response.ok) {
-        const error = new Error(`Error : ${response.status}`);
-        throw error;
-      } else {
-        const updatedPropertyAds = propertyAds.map((propertyAd) =>
-          propertyAd.documentId === documentId ? updatedPropertyAd : propertyAd
-        );
-        setPropertyAds(updatedPropertyAds);
-      }
-    } catch (error) {
-      // setError(error);
-    }
+		updatePropertyAdAPI(updatedPropertyAd, propertyAds, firebaseUrl, idToken, setPropertyAds);
   };
 
   const deletePropertyAd = async (documentId: string | undefined) => {
-    const url = `https://firestore.googleapis.com/v1/projects/cheznestor-bd113/databases/(default)/documents/propertyAd/${documentId}`;
-    const response = await fetch(url, {
-      method: "DELETE",
-			headers: {
-				Authorization: `Bearer ${idToken}`,
-			},
-    });
-    if (!response.ok) {
-      throw new Error("Failed to delete document");
-      // setError(error);
-    }
-    setPropertyAds(propertyAds.filter((ad) => ad.documentId !== documentId));
-    // return response.json();
+		deletePropertyAdAPI(documentId, propertyAds, firebaseUrl, idToken, setPropertyAds);
   };
 
   return (
@@ -148,8 +68,8 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
         isLoggedIn,
         setIsLoggedIn,
         isLoading,
-				setIsLoading,
-        apiKey
+        setIsLoading,
+        apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
       }}
     >
       {children}
