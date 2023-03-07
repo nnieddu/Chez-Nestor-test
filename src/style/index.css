@@ -81,10 +81,10 @@ body {
   animation: opacityTransi 0.1s linear;
 }
 
-.zoomAnim {
+.cardZoom {
   transition: transform 0.1s;
 }
-.zoomAnim:hover {
+.cardZoom:hover {
 	-ms-transform: scale(1.02);
   -webkit-transform: scale(1.02);
   transform: scale(1.02);
