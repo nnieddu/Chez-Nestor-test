@@ -20,7 +20,7 @@ const App = () => {
           setIsLoading(false);
         })
         .catch((error: Error) => {
-          console.error(error + ": Veuillez vous connecter.");
+          console.error("Erreur " + error.message + ": Veuillez vous connecter. (token expiré ou invalide)");
           setIsLoading(false);
         });
     } else {

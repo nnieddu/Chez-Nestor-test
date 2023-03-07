@@ -42,8 +42,9 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
   const firebaseUrl = `https://firestore.googleapis.com/v1/projects/${fireProject}/databases/(default)/documents/propertyAd`;
 
 	useEffect(() => {
-		getAllAd(firebaseUrl, uidToken, setPropertyAds, setError);
-	}, [uidToken, firebaseUrl]);
+		if (isLoggedIn)
+			getAllAd(firebaseUrl, uidToken, setPropertyAds, setError);
+	}, [uidToken, firebaseUrl, isLoggedIn]);
 
   const addPropertyAd = async (propertyAd: PropertyAdFirebase) => {
 		addPropertyAdAPI(propertyAd, firebaseUrl, uidToken, setPropertyAds);
