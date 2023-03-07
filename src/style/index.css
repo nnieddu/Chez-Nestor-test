@@ -70,7 +70,6 @@ body {
     opacity: 1;
   }
 }
-
 .opacityAnim {
   animation: opacityTransi 0.5s linear;
 }
@@ -89,4 +88,20 @@ body {
   -webkit-transform: scale(1.02);
   transform: scale(1.02);
   transition: transform 0.1s;
+}
+
+@keyframes zoomAnim {
+  0% {
+		-ms-transform: scale(0.1);
+		-webkit-transform: scale(0.1);
+		transform: scale(0.1);
+  }
+  100% {
+		-ms-transform: scale(1);
+		-webkit-transform: scale(1);
+		transform: scale(1);
+  }
+}
+.zoomAnim {
+  animation: zoomAnim 0.2s linear;
 }
