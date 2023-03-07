@@ -42,7 +42,6 @@ const DedicatedPage = () => {
           />
           <h2 className="py-32 text-center font-bold tracking-tight text-white drop-shadow-xl text-4xl sm:text-6xl">
             Erreur 404 : <br /> annonce non trouvée !...
-            {/* Erreur 404 : <br /> {id} <br /> annonce non trouvée !... */}
           </h2>
         </div>
       </div>

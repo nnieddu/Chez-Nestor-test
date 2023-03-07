@@ -18,5 +18,4 @@ export const deletePropertyAdAPI = async (
 		// setError(error);
 	}
 	setPropertyAds(propertyAds.filter((ad) => ad.documentId !== documentId));
-	// return response.json();
 };

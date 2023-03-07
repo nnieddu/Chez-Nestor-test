@@ -43,7 +43,7 @@ const LoginForm = () => {
       <Navigate to="/ChezNestorImmo" />;
     } catch (error) {
       console.error(error);
-      //add error display for user
+			// setError(error);
       setIsLoggedIn(false);
     } finally {
       setIsLoading(false);
