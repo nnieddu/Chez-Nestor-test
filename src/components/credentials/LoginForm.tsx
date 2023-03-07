@@ -5,11 +5,12 @@ import Loading from "../Loading";
 import logo from "../../style/img/logo.png";
 
 interface LoginResponse {
-  idToken: string;
+	localId: string;
   email: string;
+  idToken: string;
+	registered: boolean;
   refreshToken: string;
   expiresIn: string;
-  localId: string;
 }
 
 const LoginForm = () => {
@@ -29,7 +30,7 @@ const LoginForm = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            email: email,
+            email,
             password,
             returnSecureToken: true,
           }),
@@ -65,9 +66,7 @@ const LoginForm = () => {
         </div>
       )}
       <form
-        className={`lg:max-w-[50vw] max-w-[80vw] m-auto flex flex-col space-y-4 ${
-          isLoading ? "hidden" : ""
-        }`}
+        className="lg:max-w-[50vw] max-w-[80vw] m-auto flex flex-col space-y-4"
         onSubmit={handleSubmit}
       >
         <label className="text-gray-700 font-medium" htmlFor="email">

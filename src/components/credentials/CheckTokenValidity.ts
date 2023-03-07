@@ -1,10 +1,8 @@
 export async function checkTokenValidity(token: string | null, apikey : string | undefined): Promise<boolean> {
   if (token == null) return false;
   
-  const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
-  
   const response = await fetch(
-    `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${apiKey}`,
+    `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${apikey}`,
     {
       method: "POST",
       headers: {

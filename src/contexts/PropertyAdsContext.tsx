@@ -26,7 +26,7 @@ export const PropertyAdsContext = createContext<PropertyAdsContextType>({
   deletePropertyAd: () => {},
   error: null,
   isLoggedIn: false,
-  isLoading: false,
+  isLoading: true,
   setIsLoggedIn: () => {},
   setIsLoading: () => {},
   apiKey: undefined,
