@@ -14,7 +14,7 @@ const Modal = ({ isModalOpen, setIsModalOpen, isEdit, propertyAd }: ModalProps) 
     <Transition.Root show={isModalOpen}>
       <Dialog as="div" className="z-10" onClose={() => setIsModalOpen(false)}>
         <div className="fixed inset-0 bg-gray-500 bg-opacity-75" />
-        <div className="fixed inset-0 flex items-end justify-center p-4 text-center sm:items-center sm:p-0 opacityAnimHalf zoomAnim">
+        <div className="fixed inset-0 flex items-end justify-center p-4 text-center sm:items-center sm:p-0 zoomAnim">
           <Dialog.Panel className="m-auto text-left shadow-xl min-w-[85vw] max-h-full overflow-y-scroll">
             <div className="bg-white rounded-lg sm:flex sm:items-start px-4 pt-5 pb-4 sm:p-6 sm:pb-4 ">
               <div className="px-5 sm:flex sm:items-start w-full">
