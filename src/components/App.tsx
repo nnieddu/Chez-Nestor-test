@@ -9,19 +9,19 @@ import Loading from "./Loading";
 import { checkTokenValidity } from "./credentials/CheckTokenValidity";
 
 const App = () => {
-  const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey } = useContext(PropertyAdsContext);
+  const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey } =
+    useContext(PropertyAdsContext);
   const uidToken = localStorage.getItem("idToken");
-
+	console.log("IS LOADING : ", isLoading);
   useEffect(() => {
-    setIsLoading(true);
     if (uidToken) {
       checkTokenValidity(uidToken, apiKey)
-        .then((isValidToken: boolean) => {
-          setIsLoggedIn(isValidToken);
+        .then(() => {
+          setIsLoggedIn(true);
           setIsLoading(false);
         })
         .catch((error: Error) => {
-          console.error("Veuillez vous connecter : " + error.message);
+          console.error(error + ": Veuillez vous connecter.");
           setIsLoading(false);
         });
     } else {
@@ -34,7 +34,7 @@ const App = () => {
     return <Loading />;
   }
 
-  if (!isLoggedIn && !isLoading) {
+  if (!isLoggedIn) {
     return <LoginForm />;
   }
 

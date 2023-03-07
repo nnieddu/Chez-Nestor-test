@@ -1,14 +1,13 @@
 import { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { PropertyAdsContext } from "../../contexts/PropertyAdsContext";
-import Loading from "../Loading";
 import logo from "../../style/img/logo.png";
 
 interface LoginResponse {
-	localId: string;
+  localId: string;
   email: string;
   idToken: string;
-	registered: boolean;
+  registered: boolean;
   refreshToken: string;
   expiresIn: string;
 }
@@ -16,13 +15,12 @@ interface LoginResponse {
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoggedIn, isLoading, setIsLoading, apiKey } =
+  const { setIsLoggedIn, setIsLoading, apiKey } =
     useContext(PropertyAdsContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       const response = await fetch(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
@@ -54,17 +52,13 @@ const LoginForm = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div className="relative py-28  mt-[1%] opacityAnimHalf ">
-          <img
-            className="m-auto absolute inset-0 -z-10 h-[18vh] lg:h-full object-cover brightness-50"
-            src={logo}
-            alt="Living room background"
-          />
-        </div>
-      )}
+      <div className="relative py-28  mt-[1%] opacityAnimHalf ">
+        <img
+          className="m-auto absolute inset-0 -z-10 h-[18vh] lg:h-full object-cover brightness-50"
+          src={logo}
+          alt="Living room background"
+        />
+      </div>
       <form
         className="lg:max-w-[50vw] max-w-[80vw] m-auto flex flex-col space-y-4"
         onSubmit={handleSubmit}

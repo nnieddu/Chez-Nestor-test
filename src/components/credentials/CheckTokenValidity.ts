@@ -1,6 +1,4 @@
-export async function checkTokenValidity(token: string | null, apikey : string | undefined): Promise<boolean> {
-  if (token == null) return false;
-  
+export async function checkTokenValidity(token: string | null, apikey : string | undefined) {
   const response = await fetch(
     `https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=${apikey}`,
     {
@@ -14,7 +12,6 @@ export async function checkTokenValidity(token: string | null, apikey : string |
     }
   );
   if (!response.ok) {
-    throw new Error(`Erreur: ${response.status}`);
+    throw new Error(`${response.status}`);
   }
-  return true;
 }
