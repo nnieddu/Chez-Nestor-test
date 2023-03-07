@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'Poppins';
-	src: url('./Poppins-Regular.ttf');
-	font-weight: normal;
-	font-style: normal;
+  font-family: "Poppins";
+  src: url("./Poppins-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
 
 /*********** SCROLL BAR *********/
@@ -30,9 +30,8 @@
 
 body {
   margin: 0;
-  font-family: Poppins, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: Poppins, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -41,21 +40,21 @@ body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 7;
-	overflow-wrap: break-word;
+  overflow-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .wordBreak {
-	overflow-wrap: break-word;
+  overflow-wrap: break-word;
   overflow: hidden;
 }
 
 .leftArrow {
-	position: fixed;
-	color: rgba(126, 205, 197, 0.8);
+  position: fixed;
+  color: rgba(126, 205, 197, 0.8);
 }
 .leftArrow:hover {
-	color: rgba(126, 205, 197, 1);
+  color: rgba(126, 205, 197, 1);
 }
 
 @keyframes opacityTransi {
@@ -75,4 +74,14 @@ body {
 }
 .opacityAnimFast {
   animation: opacityTransi 0.1s linear;
+}
+
+.cardZoom {
+  transition: transform 0.1s;
+}
+.cardZoom:hover {
+	-ms-transform: scale(1.02); /* IE 9 */
+  -webkit-transform: scale(1.02); /* Safari 3-8 */
+  transform: scale(1.02);
+  transition: transform 0.1s;
 }
