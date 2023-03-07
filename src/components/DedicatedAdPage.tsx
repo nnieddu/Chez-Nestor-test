@@ -21,6 +21,7 @@ const DedicatedPage = () => {
 
   useEffect(() => {
     if (propertyAd) setImgSrc(propertyAd.img.stringValue);
+		window.scrollTo({ top: 1, behavior: "smooth" }); 
   }, [propertyAd]);
 
   if (!propertyAd) {
@@ -29,7 +30,7 @@ const DedicatedPage = () => {
         <FontAwesomeIcon
           className="z-10 flex absolute cursor-pointer fa-4x max-w-[40px] sm:max-w-[60px] ml-3 mt-3 leftArrow "
           onClick={() => {
-            navigate(-1);
+							navigate(-1);
           }}
           icon={faArrowCircleLeft}
         />
