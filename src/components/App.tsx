@@ -12,7 +12,6 @@ const App = () => {
   const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey } =
     useContext(PropertyAdsContext);
   const uidToken = localStorage.getItem("idToken");
-	console.log("IS LOADING : ", isLoading);
   useEffect(() => {
     if (uidToken) {
       checkTokenValidity(uidToken, apiKey)
