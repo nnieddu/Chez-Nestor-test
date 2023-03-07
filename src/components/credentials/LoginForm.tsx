@@ -15,7 +15,8 @@ interface LoginResponse {
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoggedIn, isLoading, setIsLoading, apiKey } = useContext(PropertyAdsContext);
+  const { setIsLoggedIn, isLoading, setIsLoading, apiKey } =
+    useContext(PropertyAdsContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,7 +54,7 @@ const LoginForm = () => {
   return (
     <>
       {isLoading ? (
-			<Loading/>
+        <Loading />
       ) : (
         <div className="relative py-28  mt-[1%] opacityAnimHalf ">
           <img

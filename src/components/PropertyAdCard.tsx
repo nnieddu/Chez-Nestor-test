@@ -10,14 +10,14 @@ interface PropertyAdCardProps {
 
 const PropertyAdCard = ({ propertyAd }: PropertyAdCardProps) => {
   return (
-    <div className="my-6 mx-[5vw] opacityAnimHalf">
+    <div className="my-6 mx-[10vw] opacityAnimHalf">
       <Link
         to={`/property/${propertyAd.documentId}`}
         onClick={() => window.scrollTo(0, 0)}
       >
-        <div className="flex flex-col lg:flex-row h-50 lg:h-80 bg-cardColor shadow-lg rounded-lg overflow-hidden">
+        <div className="flex flex-col lg:flex-row h-50 lg:h-80 bg-cardColor shadow-lg rounded-lg overflow-hidden whitespace-pre-line ">
           <img
-            className="lg:max-h-[100%] lg:min-w-[25vw] lg:max-w-[25vw] w-full max-h-[25vh] object-cover"
+            className="lg:max-h-[100%] lg:min-w-[25vw] lg:max-w-[25vw] max-h-[25vh] object-cover"
             src={propertyAd.img.stringValue ?? defaultImage}
             alt="Living room background"
             onError={(e) => {
