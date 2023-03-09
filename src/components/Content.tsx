@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 import PropertyAdCard from "./PropertyAdCard";
 import Modal from "./addOrEdit/Modal";
@@ -17,10 +17,6 @@ const Content = () => {
   const filteredPropertyAds = [...propertyAds]
     .sort((a, b) => a.title.stringValue.localeCompare(b.title.stringValue))
     .slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
-
-  useEffect(() => {
-		
-	});
 
 	return (
     <div className="flex flex-col opacityAnim">

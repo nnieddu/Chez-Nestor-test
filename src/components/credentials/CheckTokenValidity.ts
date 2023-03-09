@@ -21,7 +21,7 @@ export async function checkTokenValidity(
     );
     if (!response.ok) {
       const responseData = await response.json();
-      throw new Error(`Erreur: ${responseData.error.message}, veuillez vous connecter.`);
+      throw new Error(`Erreur: ${responseData.error.message}, veuillez vous reconnecter.`);
     }
     return true;
   } catch (error) {

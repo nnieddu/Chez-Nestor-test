@@ -14,14 +14,14 @@ interface LoginResponse {
 }
 
 const LoginForm = () => {
-  const [email, setemail] = useState("");
-  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { setIsLoggedIn, apiKey, setError, error } = useContext(PropertyAdsContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+		var emailInput = (document.getElementById('emailInput') as HTMLInputElement)?.value; //
+		var passwordInput = (document.getElementById('passwordInput') as HTMLInputElement)?.value; //
     try {
       const response = await fetch(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
@@ -29,8 +29,8 @@ const LoginForm = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            email,
-            password,
+            email: emailInput,
+            password: passwordInput,
             returnSecureToken: true,
           }),
         }
@@ -65,26 +65,22 @@ const LoginForm = () => {
         onSubmit={handleSubmit}
       >
         <label className="text-gray-700 font-medium" htmlFor="email">
-          Adresse mail:
+          Adresse email:
         </label>
         <input
           className="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3"
-          id="email"
+          id="emailInput"
           type="text"
-          value={email}
-          onChange={(e) => setemail(e.target.value)}
           required
           autoFocus
         />
         <label className="text-gray-700 font-medium" htmlFor="password">
-          Password:
+          Mot de passe:
         </label>
         <input
           className="bg-gray-100 border border-gray-300 rounded-lg py-2 px-3"
-          id="password"
+          id="passwordInput"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
           required
         />
         {error ? <ErrorDisplay /> : <span className="text-transparent">{"ERROR"}</span>}

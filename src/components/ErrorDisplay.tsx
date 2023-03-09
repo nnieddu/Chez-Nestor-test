@@ -3,12 +3,48 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { PropertyAdsContext } from "../contexts/PropertyAdsContext";
 
+function messageBeautifier(message: string): string {
+  let newMsg: string;
+  switch (true) {
+    case message.includes("EMAIL_NOT_FOUND"):
+      newMsg = message.replace("EMAIL_NOT_FOUND", "adresse email non trouvée");
+      break;
+    case message.includes("INVALID_EMAIL"):
+      newMsg = message.replace("INVALID_EMAIL", "adresse email non valide");
+      break;
+    case message.includes("INVALID_PASSWORD"):
+      newMsg = message.replace("INVALID_PASSWORD", "mot de passe erroné");
+      break;
+    case message.includes("INVALID_ID_TOKEN"):
+      newMsg = message.replace("INVALID_ID_TOKEN", "jeton de connexion invalide ou expiré");
+      break;
+    case message.includes("USER_NOT_FOUND"):
+      newMsg = message.replace(
+        "USER_NOT_FOUND",
+        "le compte d'utilisateur a été désactivé par un administrateur."
+      );
+      break;
+    case message.includes("USER_DISABLED"):
+      newMsg = message.replace(
+        "USER_DISABLED",
+        "le compte d'utilisateur a été désactivé par un administrateur."
+      );
+      break;
+    default:
+      newMsg = message;
+  }
+  return newMsg;
+}
+
 export default function ErrorDisplay() {
   const { error } = useContext(PropertyAdsContext);
   var displayedError;
 
   if (error instanceof Error) {
-    displayedError = error.message;
+		const t0 = performance.now();
+    displayedError = messageBeautifier(error.message);
+		const t1 = performance.now();
+		console.log(`Function took ${t1 - t0} milliseconds to execute.`);
   } else {
     displayedError =
       "Une erreur inconnue s'est produite, veuillez réessayer ou contacter l'administrateur : " +
@@ -16,7 +52,7 @@ export default function ErrorDisplay() {
   }
 
   return (
-    <span className="opacityAnimFast text-center text-red pr-3">
+    <span className="opacityAnimFast text-center tracking-tight text-red pr-3">
       <FontAwesomeIcon
         style={{ color: "red" }}
         className="mr-2"
@@ -26,14 +62,3 @@ export default function ErrorDisplay() {
     </span>
   );
 }
-
-// https://firebase.google.com/docs/reference/rest/auth?hl=fr
-
-// Codes d'erreur courants : signInWithPassword
-// EMAIL_NOT_FOUND : aucun enregistrement d'utilisateur ne correspond à cet identifiant. L'utilisateur a peut-être été supprimé.
-// INVALID_PASSWORD : le mot de passe n'est pas valide ou l'utilisateur n'a pas de mot de passe.
-// USER_DISABLED : le compte d'utilisateur a été désactivé par un administrateur. 
-
-// Codes d'erreur courants signInWithPassword
-// INVALID_ID_TOKEN : les informations d'identification de l'utilisateur ne sont plus valides. L'utilisateur doit se reconnecter.
-// USER_NOT_FOUND : il n'y a pas d'enregistrement d'utilisateur correspondant à cet identifiant. L'utilisateur a peut-être été supprimé. 
