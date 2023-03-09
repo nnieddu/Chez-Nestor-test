@@ -9,25 +9,18 @@ import Loading from "./Loading";
 import { checkTokenValidity } from "./credentials/CheckTokenValidity";
 
 const App = () => {
-  const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey } =
+  const { isLoggedIn, setIsLoggedIn, isLoading, setIsLoading, apiKey, setError } =
     useContext(PropertyAdsContext);
   const uidToken = localStorage.getItem("idToken");
+
   useEffect(() => {
     if (uidToken) {
-      checkTokenValidity(uidToken, apiKey)
-        .then(() => {
-          setIsLoggedIn(true);
-          setIsLoading(false);
-        })
-        .catch((error: Error) => {
-          console.error("Erreur " + error.message + ": Veuillez vous connecter. (token expiré ou invalide)");
-          setIsLoading(false);
-        });
-    } else {
-      setIsLoggedIn(false);
-      setIsLoading(false);
-    }
-  }, [setIsLoggedIn, setIsLoading, apiKey, uidToken]);
+      checkTokenValidity(uidToken, apiKey, setError).then((response) => {
+        setIsLoggedIn(response);
+        setIsLoading(false);
+      });
+    } else setIsLoading(false);
+  }, [setIsLoggedIn, setIsLoading, apiKey, uidToken, setError]);
 
   if (isLoading) {
     return <Loading />;

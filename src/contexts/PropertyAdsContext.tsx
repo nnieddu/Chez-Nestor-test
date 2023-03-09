@@ -11,11 +11,12 @@ export type PropertyAdsContextType = {
   addPropertyAd: (propertyAd: PropertyAdFirebase) => void;
   updatePropertyAd: (propertyAd: PropertyAd) => void;
   deletePropertyAd: (documentId: string) => void;
-  error: Error | null;
+  error: Error | null | unknown;
   isLoggedIn: Boolean;
   isLoading: Boolean;
   setIsLoggedIn: (isLogged: boolean) => void;
   setIsLoading: (isLogged: boolean) => void;
+  setError: (error: Error | null | unknown) => void;
   apiKey: string | undefined;
 };
 
@@ -29,12 +30,13 @@ export const PropertyAdsContext = createContext<PropertyAdsContextType>({
   isLoading: true,
   setIsLoggedIn: () => {},
   setIsLoading: () => {},
+  setError: () => {},
   apiKey: undefined,
 });
 
 const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [propertyAds, setPropertyAds] = useState<PropertyAd[]>([]);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<Error | null | unknown>(null);
   const [isLoggedIn, setIsLoggedIn] = useState<Boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
 	const uidToken = localStorage.getItem("idToken");
@@ -66,6 +68,7 @@ const PropertyAdsContextProvider = ({ children }: { children: React.ReactNode })
         updatePropertyAd,
         deletePropertyAd,
         error,
+				setError,
         isLoggedIn,
         setIsLoggedIn,
         isLoading,

@@ -4,7 +4,7 @@ export const getAllAd = async (
   firebaseUrl: string,
   idToken: string | null,
   setPropertyAds: React.Dispatch<React.SetStateAction<PropertyAd[]>>,
-  setError: React.Dispatch<React.SetStateAction<Error | null>>
+  setError: React.Dispatch<React.SetStateAction<Error | null | unknown>>,
 ) => {
   try {
     const response = await fetch(firebaseUrl, {
@@ -14,8 +14,9 @@ export const getAllAd = async (
     });
 
     if (!response.ok) {
-      const error = new Error(`Error : ${response.status}`);
-      setError(error);
+      // const error = new Error(`Error : ${response.status}`);
+			const error = await response.json();
+			throw new Error(`Erreur lors de la recupération des annonces : ${error.error.message}`);
     } else {
       const data = await response.json();
       const propertyAds = data.documents.map((doc: any) => {
@@ -27,6 +28,6 @@ export const getAllAd = async (
       setPropertyAds(propertyAds);
     }
   } catch (error) {
-    // setError(error);
+		setError(error);
   }
 };

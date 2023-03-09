@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { Navigate } from "react-router-dom";
+import ErrorDisplay from "../ErrorDisplay";
 import { PropertyAdsContext } from "../../contexts/PropertyAdsContext";
 import logo from "../../style/img/logo.png";
 
@@ -15,8 +16,8 @@ interface LoginResponse {
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState("");
-  const { setIsLoggedIn, setIsLoading, apiKey } =
-    useContext(PropertyAdsContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const { setIsLoggedIn, apiKey, setError, error } = useContext(PropertyAdsContext);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,15 +36,15 @@ const LoginForm = () => {
         }
       );
       if (!response.ok) {
-        throw new Error("Login failed");
+        const responseData = await response.json();
+        throw new Error(`Erreur de connection : ${responseData.error.message}`);
       }
-      const data: LoginResponse = await response.json();
+      const responseLoginData: LoginResponse = await response.json();
       setIsLoggedIn(true);
-      localStorage.setItem("idToken", data.idToken);
+      localStorage.setItem("idToken", responseLoginData.idToken);
       <Navigate to="/ChezNestorImmo" />;
     } catch (error) {
-      console.error(error);
-			// setError(error);
+      setError(error);
       setIsLoggedIn(false);
     } finally {
       setIsLoading(false);
@@ -86,8 +87,17 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        {error ? <ErrorDisplay /> : <span className="text-transparent">{"ERROR"}</span>}
         <button className="bg-chezNestor hover:bg-chezNestorDark text-white rounded-lg py-2 px-4 hover:bg-blue-600">
-          Se connecter
+          Se connecter{" "}
+          {isLoading ? (
+            <div
+              className="text-white-600 ml-1 inline-block h-4 w-4 animate-spin rounded-full border-2
+        border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+            />
+          ) : (
+            <div className="ml-1 inline-block h-4 w-4" role="status" />
+          )}
         </button>
         <br />
       </form>
