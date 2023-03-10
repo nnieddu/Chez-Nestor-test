@@ -17,6 +17,7 @@ function messageBeautifier(message: string): string {
       break;
     case message.includes("INVALID_ID_TOKEN"):
       newMsg = message.replace("INVALID_ID_TOKEN", "jeton de connexion invalide ou expiré");
+			localStorage.removeItem("idToken");
       break;
     case message.includes("USER_NOT_FOUND"):
       newMsg = message.replace(
@@ -41,10 +42,10 @@ export default function ErrorDisplay() {
   var displayedError;
 
   if (error instanceof Error) {
-		const t0 = performance.now();
+		// const t0 = performance.now();
     displayedError = messageBeautifier(error.message);
-		const t1 = performance.now();
-		console.log(`Function took ${t1 - t0} milliseconds to execute.`);
+		// const t1 = performance.now();
+		// console.log(`Function took ${t1 - t0} milliseconds to execute.`);
   } else {
     displayedError =
       "Une erreur inconnue s'est produite, veuillez réessayer ou contacter l'administrateur : " +

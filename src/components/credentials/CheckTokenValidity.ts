@@ -5,8 +5,10 @@ export async function checkTokenValidity(
 ): Promise<boolean> {
   try {
     if (token === "undefined" || apikey === undefined)
+		{
+			localStorage.removeItem("idToken");
       throw new Error("Erreur, token ou clée API invalide");
-
+		}
     const response = await fetch(
       `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${apikey}`,
       {

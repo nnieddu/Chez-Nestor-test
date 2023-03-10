@@ -53,9 +53,9 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="relative py-28  mt-[1%] opacityAnimHalf ">
+      <div className="py-8 opacityAnimHalf">
         <img
-          className="m-auto absolute inset-0 -z-10 h-[18vh] lg:h-full object-cover brightness-50"
+          className="m-auto -z-10 object-cover brightness-50 max-w-[80vw] max-h-[20vh] h-auto w-auto"
           src={logo}
           alt="Living room background"
         />
